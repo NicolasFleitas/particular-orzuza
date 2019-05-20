@@ -35,7 +35,7 @@
     obj.put("nuevo", nuevo);
 
     obj.put("id_convocatoria",convocatorias.getId_convocatoria());    
-    
+    obj.put("nombre_convocatoria", convocatorias.getNombre_convocatoria());    
     //obj.put("monto_convocatoria", convocatorias.getMonto_convocatoria());    
     obj.put("codigo_convocatoria", convocatorias.getCodigo_convocatoria());
     //obj.put("contenido_detalle", contenido_detalle);

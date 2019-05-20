@@ -308,10 +308,8 @@ function buscarIdConvocatoriaCodigo() {
             $("#id_curso").val(json.id_curso);
             $("#nombre_curso").val(json.nombre_curso);
             $("#id_turno").val(json.id_turno);
-            $("#nombre_turno").val(json.nombre_turno);
-           // $("#monto_convocatoria").val(json.monto_convocatoria);            
-          $("#codigo_convocatoria").val(json.codigo_convocatoria);
-           // $("#cupos_convocatoria").val(json.cupos_convocatoria);
+            $("#nombre_turno").val(json.nombre_turno);                      
+          $("#codigo_convocatoria").val(json.codigo_convocatoria);           
         },
         error: function (e) {
             $("#mensajes").html("No se pudo recuperar los datos.");
@@ -343,6 +341,7 @@ function buscarNombreConvocatoria() {
                 $("#panelBuscar").html("");
                 $("#id_convocatoria").val(id);
                 $("#nombre_convocatoria").focus();
+                
                 // TURNO ADD
                 buscarIdConvocatoria();
                 $("#buscar").fadeOut("fast");
