@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CEPI TB | Inscripciones</title>
+        <link rel="icon" type="image/png" href="../../../favicon.png" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="../../../css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="../../../css/estilos.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="../../../manual/html/vendors/bootstrap-3.3.6/css/bootstrap-theme.min.css" type="text/css">
+
+        <script src="../../../js/jquery-for-dtpicker.min.js" type="text/javascript"></script>
+        <script src="../../../js/jquery.simple-dtpicker.js" type="text/javascript"></script>
+    </head>
+
+    <body>
+        <div id="confirmar"></div>
+        <div id="buscar"></div>
+        <div id="panelPrograma" class="panel panel-primary">
+            <div class="panel-heading centrado">Inscripciones | <span id="susuario_usuario"></span></div>
+            <div hidden="" class="col-md-2">
+                <select  id="listado" class="form-control">
+                    <option  value="constancias">Constancias</option>
+                </select>
+            </div>
+            <div class="panel-body">
+                <form id="formPrograma">
+
+                    <div class="row">
+                        <div class="col-xs-1 col-sm-1 col-md-1">
+                            <span>Nº</span>
+                        </div>
+                        <div class="col-xs-2 col-sm-3 col-md-1">
+                            <input id="id_inscripcion" name="id_inscripcion" type="text" class="form-control input-sm"
+                                   placeholder="nº" onkeypress="return SoloNumeros(event)">
+                        </div>
+                        <div class="col-xs-8 col-sm-1 col-md-1">
+                            <button id="botonBuscarIdInscripcion" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                            
+                        </div>
+                        <div class="col-sm-7 col-md-9">
+
+                        </div>
+                    </div>
+                    <hr>
+
+                    <!--******************************* --> 
+                    <div class="row">                 
+                        <!--<center> <label>Ver estado </label> </center>-->
+                       
+                        <div class="col-md-2 col-xs-4 col-sm-3">
+                            <button id="botonCuota" type="button" class="btn btn-primary btn-sm"><span class="">Cuotas vencidas</span></button>
+                        </div>
+                    </div>
+                    <hr>
+                    <!-- ***************************** -->
+                    <div class="row">
+                        <div class="col-md-1 col-xs-5 col-sm-4">
+                            <span>Fecha ingreso</span>
+                        </div>
+                        <div class="col-md-2 col-xs-5 col-sm-4">
+                            <input readonly="" id="fecha_inscripcion" name="fecha_inscripcion" type="date" class="form-control input-sm ">
+                        </div>
+                        <div class="col-md-9 col-xs-2 col-sm-4"></div>                       
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1 col-xs-5 col-sm-4">
+                            <span>Fecha de Venc</span>
+                        </div>
+                        <div class="col-md-2 col-xs-5 col-sm-4">
+                            <input id="vencimientocuota_inscripcion" name="vencimientocuota_inscripcion" type="date" class="form-control input-sm">
+                        </div>
+                        <div class="col-md-9 col-xs-2 col-sm-4"></div>                       
+
+                    </div>
+                    <hr>    
+                    <!--ALUMNO START-->
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-1 col-md-1">
+                            <span>Alumno</span>
+                        </div>
+                        <div class="col-xs-3 col-sm-2 col-md-1">
+                            <input id="id_alumno" name="id_alumno" type="text" 
+                                   class="form-control input-sm" placeholder="nº"
+                                   onkeypress=" return SoloNumeros(event)">
+                        </div>
+                        <div class="col-xs-4 col-sm-3 col-md-1">
+                            <button id="botonBuscarIdAlumno" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                            <button id="botonAgregarAlumno" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></button>
+                        </div>
+                        <div class="col-xs-2 col-md-9">
+                        </div>
+                    </div>               
+
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-2 col-md-1">
+                            <span>Nombre</span>
+                        </div>
+                        <div class="col-xs-8 col-sm-4 col-md-3">
+                            <input id="nombre_alumno" name="nombre_alumno" type="text" class="form-control input-sm"
+                                   placeholder="Nombre" onkeypress=" return soloLetras(event)" disabled="disabled" onkeyup="this.value = this.value.toUpperCase()">
+                        </div>
+                        <div class="col-xs-1 col-sm-6 col-md-8"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-2 col-md-1">
+                            <span>Apellido</span>
+                        </div>
+                        <div class="col-xs-8 col-sm-4 col-md-3">
+                            <input id="apellido_alumno" name="apellido_alumno" type="text" class="form-control input-sm"
+                                   placeholder="Apellido" onkeypress=" return soloLetras(event)" disabled="disabled" onkeyup="this.value = this.value.toUpperCase()">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-2 col-md-1">
+                            <span>CI:</span>
+                        </div>
+                        <div class="col-xs-8 col-sm-4 col-md-3">
+                            <input id="nroci_alumno" name="nroci_alumno" type="text" class="form-control input-sm"
+                                   placeholder="Nro. CI" onkeypress=" return SoloNumeros(event)" disabled="disabled">
+                        </div>
+                    </div>
+                    <!--ALUMNO END -->
+                    <hr>
+                    <!--CONVOCACATORIAS START -->
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-1 col-md-1">
+                            <span>Curso</span>
+                        </div>
+
+                        <div class="col-xs-2 col-sm-2 col-md-1">
+                            <input id="id_convocatoria" name="id_convocatoria" type="text" class="form-control input-sm"
+                                   placeholder="nº">
+                        </div>
+
+                        <div class="col-xs-2 col-sm-1 col-md-1">
+                            <span>Cód</span>
+                        </div>
+
+                        <div class="col-xs-3 col-sm-2 col-md-1">
+                            <input id="codigo_convocatoria" name="codigo_convocatoria" type="text" class="form-control input-sm"
+                                   placeholder="codigo">
+                        </div>
+
+                        <div class="col-xs-2 col-sm-3 col-md-1">
+                            <button id="botonBuscarIdConvocatoria" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                    <div class="col-xs-2 col-sm-1 col-md-1">
+                            <span>Descrip</span>
+                    </div>
+                     <div class="col-xs-9 col-sm-2 col-md-3">
+                            <input readonly="" id="nombre_convocatoria" name="nombre_convocatoria" type="text" class="form-control input-sm"
+                                   placeholder="Descripcion" onkeypress=" return soloLetras(event)" onkeyup="this.value = this.value.toUpperCase()">
+                     </div>
+                     
+                        
+                     <div class="col-md-8">
+                     </div>
+                        
+                    
+                    <div class="col-xs-2 col-sm-1 col-md-1">
+                            <span>NºCuotas</span>
+                    </div>
+                        
+                    <div class="col-xs-2 col-sm-2 col-md-1">
+                        <input id="nro_cuotas" name="nro_cuotas" type="number" min="0" max="12" class="form-control input-sm">
+                    </div> 
+                    </div>
+                    <!--CONVOCATORIAS END -->
+                </form>
+            </div>
+            <div class="panel-footer centrado">
+                <button id="botonAgregar" type="button" class="btn btn-primary btn-sm">Agregar</button>
+                <button id="botonModificar" type="button" class="btn btn-primary btn-sm">Modificar</button>
+                <button id="BotonEliminar" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#confirmarEliminar">Eliminar</button>
+               <!-- <button id="botonImprimir" type="button" class="btn btn-primary btn-sm">Imprimir</button> -->
+                <button id="botonSalir" type="button" class="btn btn-primary btn-sm">Salir</button>
+            </div>
+        </div>
+
+        <div id="mensajes" class="well well-sm centrado">Mensaje del Sistema.</div>
+        <div class="modal fade" id="confirmarEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header centrado">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">
+                                &times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Mensaje del Sistema</h4>
+                    </div>
+                    <div class="modal-footer centrado">
+                        <button id="botonEliminarAlert" type="button" class="btn btn-primary btn-sm">Eliminar</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <script src="../../../js/jquery.min.js" type="text/javascript"></script>
+        <script src="../../../js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../../../js/funciones.js" type="text/javascript"></script>
+        <script src="js/funciones.js" type="text/javascript"></script>
+        <script>
+       
+                                       //  verificarSesion(true);
+                                       $("#buscar").css("display", "none");
+                                       $("#id_inscripcion").focus();
+                                       siguienteCampo("#id_inscripcion", "#fecha_vencimiento", false);
+                                       $("#id_inscripcion").focusout(function (event) {
+                                           if ($("#id_inscripcion").val() === "") {
+                                               $("#id_inscripcion").val("0");
+                                           }
+                                           buscarIdInscripcion();
+                                       });
+
+                                       $("#nro_cuotas").blur(function () {
+                                           if ($("#nro_cuotas").value > 12) {
+                                               $("#nro_cuotas").val("0");
+                                           }
+                                       });
+
+                                       $("#botonBuscarIdInscripcion").on('click', function () {
+                                           $("#buscar").load("buscar.html");
+                                           $("#buscar").fadeIn("fast");
+                                           $("#panelPrograma").fadeOut("fast");
+                                       });
+
+
+                                       $("#botonAgregarAlumno").on('click', function () {
+                                           location.href = "../../archivos/alumnos/index.html";
+                                       });
+
+
+
+                                       $("#botonAgregar").on('click', function () {
+                                           if (validarFormulario()) {
+                                               agregarInscripcion();
+                                           }
+                                       });
+                                       $("#botonModificar").on('click', function () {
+                                           if (validarFormulario()) {
+                                               modificarInscripcion();
+                                           }
+                                       });
+                                       $("#botonEliminarAlert").on('click', function () {
+                                           eliminarInscripcion();
+                                           $('#confirmarEliminar').modal('hide');
+                                       });
+                                       $("#botonSalir").on('click', function () {
+                                           location.href = "../../../menu.html";
+                                       });
+
+                                       // ALUMNO
+
+                                       $("#id_alumno").focusout(function (event) {
+                                           if ($("#id_alumno").val() === "") {
+                                               $("#id_alumno").val("0");
+                                           }
+                                           buscarIdAlumno();
+                                       });
+
+                                       $("#botonBuscarIdAlumno").on('click', function () {
+                                           $("#buscar").load("buscarAlumno.html");
+                                           $("#buscar").fadeIn("fast");
+                                           $("#panelPrograma").fadeOut("fast");
+                                       });
+                                       // CONVOCATORIA
+
+                                       $("#botonBuscarIdConvocatoria").on('click', function () {
+                                           $("#buscar").load("buscarConvocatoria.html");
+                                           $("#buscar").fadeIn("fast");
+                                           $("#panelPrograma").fadeOut("fast");
+                                       });
+
+                                       $("#id_convocatoria").focusout(function (event) {
+                                           if ($("#id_convocatoria").val() === "") {
+                                               $("#id_convocatoria").val("0");
+                                           }
+                                           buscarIdConvocatoria();
+                                           var id = $("#id_convocatoria").val();
+                                           $("#id_convocatoria").val("0");
+                                       });
+
+
+                                       $("#codigo_convocatoria").focusout(function (event) {
+                                           if ($("#codigo_convocatoria").val() === "") {
+                                               $("#codigo_convocatoria").val("");
+                                           }
+                                           buscarIdConvocatoriaCodigo();
+                                           var id = $("#codigo_convocatoria").val();
+                                           $("#codigo_convocatoria").val("0");
+                                       });
+
+                                       $("#botonImprimir").on('click', function () {
+                                           var l = $("#listado").val();
+                                           var id_ins = $("#id_inscripcion").val();
+                                           var jsp = "jsp/constancias.jsp";
+                                           window.open(jsp + "?l=" + l + "&id=" + id_ins);
+                                       });
+
+                                       $("#botonCuota").on('click', function () {
+                                           $("#buscar").load("buscarCuotasVencidas.html");
+                                           $("#buscar").fadeIn("fast");
+                                           $("#panelPrograma").fadeOut("fast");
+                                       });
+</script>
+
+
+
+
+    </body>
+
+</html>
