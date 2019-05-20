@@ -14,7 +14,7 @@
     int id_cuenta = Integer.parseInt(request.getParameter("id_cuenta"));
     int nro_cuota = Integer.parseInt(request.getParameter("nro_cuota"));
     String stotal = request.getParameter("total");
-    String montoenletras = Utiles.cantidadConLetra(stotal);
+   // String montoenletras = Utiles.cantidadConLetra(stotal);
     
     String tipo = "error";
     String mensaje = "Datos no agregados.";
@@ -24,7 +24,7 @@
     Recibos recibo = new Recibos();
     recibo.setId_recibo(id_recibo);
     recibo.setCuentas(cuentas);
-    recibo.setMontoenletras(montoenletras);
+  //  recibo.setMontoenletras(montoenletras);
     
     
     if (RecibosControlador.agregar(recibo)) {

@@ -5,8 +5,8 @@
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.sql.ResultSet"%>
 <%   
-    int id_usuario = Integer.parseInt(request.getParameter("id_usuario2"));
-    //int id_usuario = 1;
+   int id_usuario = Integer.parseInt(request.getParameter("sid_usuario"));
+   //int id_usuario = 1;
     String tipo = "error";
     String mensaje = "Datos no encontrados.";
     String nuevo = "true";    
@@ -17,7 +17,7 @@
         tipo = "success";
         mensaje = "Datos encontrados.";
         nuevo = "false";
-    }else{
+    }else {
         caja = new Cajas();
         caja.setId_caja(0);
         java.sql.Date fechaapertura = new java.sql.Date(new java.util.Date().getTime());
@@ -28,7 +28,7 @@
         
     }
     
-    int id_caja =caja.getId_caja();
+    int id_caja = caja.getId_caja();
 
     String contenido_detalle = DetallesCajasControlador.buscarIdCaja(id_caja);
     

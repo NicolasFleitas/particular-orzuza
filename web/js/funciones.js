@@ -79,11 +79,12 @@ function verificarSesion(programa) {
                     location.href = "index.html";
                 }
         }
-            $("#sid_usuario").html(json.id_usuario);
-            $("#snombre_usuario").html(json.nombre_usuario);
-            $("#slogin_usuario").html(json.login_usuario);
-            
-            $("#id_usuario2").html(json.id_usuario);
+           // $("#sid_usuario").html(json.id_usuario);
+           // $("#snombre_usuario").html(json.nombre_usuario);
+            $("#slogin_usuario").html(json.login_usuario);            
+            $("#sid_usuario").val(json.id_usuario);
+            $("#snombre_usuario").val(json.nombre_usuario);
+            $("#slogin_usuario").val(json.login_usuario); 
             
             
             $("#mensajes").html(json.mensaje);

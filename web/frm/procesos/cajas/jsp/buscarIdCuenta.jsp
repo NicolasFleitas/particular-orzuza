@@ -1,21 +1,17 @@
-<%@page import="modelos.CuentasClientes"%>
-<%@page import="controladores.CuentasClientesControlador"%>
+<%@page import="modelos.Cuentas"%>
+<%@page import="controladores.CuentasControlador"%>
 <%@page import="controladores.DetallesCajasControlador"%>
 <%@page import="modelos.DetallesCajas"%>
-<%@page import="controladores.FacturaDetalleVentasControlador"%>
-<%@page import="controladores.FacturaVentasControlador"%>
 <%@page import="modelos.FacturaVentas"%>
 <%@page import="utiles.Utiles"%>
 <%@page import="modelos.Tipo_facturas"%>
-<%@page import="modelos.Clientes"%>
-
-
+<%@page import="modelos.Alumnos"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.sql.ResultSet"%>
 <%
     //int id_factura_venta = Integer.parseInt(request.getParameter("id_factura_venta"));
     int id_cuenta = Integer.parseInt(request.getParameter("id_cuenta"));
-     //String sfecha_factura_venta = request.getParameter("fecha_factura_venta");
+    //String sfecha_factura_venta = request.getParameter("fecha_factura_venta");
     //java.sql.Date fecha_factura_venta = Utiles.stringToSqlDate(sfecha_factura_venta);
     //int id_tipo_factura = Integer.parseInt(request.getParameter("id_tipo_factura"));
     //String ruc_factura_venta = request.getParameter("ruc_factura_venta");

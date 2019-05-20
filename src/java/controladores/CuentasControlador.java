@@ -100,7 +100,7 @@ public class CuentasControlador {
                         }
                     }
                     ps.close();
-                    System.out.println("--> " + valor);
+                    System.out.println("Cuentas --> " + valor);
                 }
             } catch (SQLException ex) {
                 System.out.println("--> " + ex.getLocalizedMessage());

@@ -6,9 +6,9 @@ function hidden() {
 
         $("#tf").prop('hidden', false);
         $("#tf1").prop('hidden', true);
-        $("#id_factura_venta").prop('readonly', false);
+        $("#id_factura_cuenta").prop('readonly', false);
         $("#id_cuenta").val(0);
-        $("#id_factura_venta").val(0);
+        $("#id_factura_cuenta").val(0);
         $("#total").val(0);
         $("#vuelto").prop('style', 'color: black');
         $("#importe").val(0);
@@ -19,8 +19,8 @@ function hidden() {
         if (t === "2"){
             $("#tf").prop('hidden', true);
             $("#tf1").prop('hidden', false);
-            $("#id_factura_venta").prop('readonly', true);
-            $("#id_factura_venta").val(0);
+            $("#id_factura_cuenta").prop('readonly', true);
+            $("#id_factura_cuenta").val(0);
             $("#nro_cuota").val(0);
             $("#total").val(0);
             $("#vuelto").prop('style', 'color: black');
@@ -113,9 +113,9 @@ function eliminarCaja() {
 function buscarIdCaja() {
     var datosFormulario = $("#formPrograma").serialize();
     //alert(datosFormulario);
-    var id_usuario = $("#sid_usuario").val();
+    var id_usuario = $("#id_usuario").val();
     datosFormulario += "&sid_usuario=" + id_usuario;
-    alert(datosFormulario);
+  //  alert(datosFormulario);
     $.ajax({
         type: 'POST',
         url: 'jsp/buscarId.jsp',
@@ -273,13 +273,13 @@ function buscarIdCajaDetalle() {
             $("#mensajes").html(json.mensaje);
             $("#id_detallecaja").val(json.id_detallecaja);
 //            $("#id_factura_caja").val(json.id_articulo);
-//            $("#precio_venta").val(json.precio_venta);
+//            $("#precio_cuenta").val(json.precio_cuenta);
 //            $("#precio_compra").val(json.precio_compra);
 //            $("#iva_articulo").val(json.iva_articulo);
-//            $("#cantidad_venta").val(json.cantidad_venta);
+//            $("#cantidad_cuenta").val(json.cantidad_cuenta);
 
-            $("#id_factura_venta").val(json.id_factura_venta);
-            //$("#numero_factura_venta").val(json.numero_factura_venta);
+          //  $("#id_factura_cuenta").val(json.id_factura_cuenta);
+            //$("#numero_factura_cuenta").val(json.numero_factura_cuenta);
             $("#id_forma_pago").val(json.id_forma_pago);
             //$("#nombre_forma_pago").val(json.nombre_forma_pago);
 
@@ -288,7 +288,7 @@ function buscarIdCajaDetalle() {
             //$("#total").val(json.total);
             $("#importe").val(json.importe);
             //$("#vuelto").val(json.vuelto);
-            //$("#subtotal_venta").val(json.subtotal_venta);
+            //$("#subtotal_cuenta").val(json.subtotal_cuenta);
         },
         error: function (e) {
             $("#mensajes").html("No se pudo recuperar los datos.");
@@ -388,12 +388,12 @@ function eliminarCajaDetalle() {
     });
 }
 
-function buscarIdVenta() {
+function buscarIdCuenta() {
     var datosFormulario = $("#formLinea").serialize();
     //alert(datosFormulario);
     $.ajax({
         type: 'POST',
-        url: 'jsp/buscarIdVenta.jsp',
+        url: 'jsp/buscarIdCuenta.jsp',
         data: datosFormulario,
         dataType: 'json',
         beforeSend: function (objeto) {
@@ -401,21 +401,21 @@ function buscarIdVenta() {
         },
         success: function (json) {
             $("#mensajes").html(json.mensaje);
-            $("#id_factura_venta").val(json.id_factura_venta);
+            $("#id_cuenta").val(json.cuenta);
             $("#total").val(json.total);
             $("#id_cuenta").val(0);
             //$("#vuelto").val(json.vuelto);
             //$("#id_cliente").val(json.id_cliente);
             //$("#nombre_cliente").val(json.nombre_cliente);
             //$("#ruc_cliente").val(json.ruc_cliente);
-            //$("#fecha_factura_venta").val(json.fecha_factura_venta);
+            //$("#fecha_factura_cuenta").val(json.fecha_factura_cuenta);
             //$("#id_tipo_factura").val(json.id_tipo_factura);
             //$("#nombre_tipo_factura").val(json.nombre_tipo_factura);
             /*$("#subtotal_5").val(json.subtotal_5);
              $("#subtotal_10").val(json.subtotal_10);
              $("#subtotal_exenta").val(json.subtotal_exenta);*/
             //$("#cantidad_cuotas").val(json.cantidad_cuotas);
-            //var fecha = $("#fecha_factura_venta").serialize();
+            //var fecha = $("#fecha_factura_cuenta").serialize();
 
             //$("#contenidoDetalle").html(json.contenido_detalle);
             /*if (json.nombre_tipo_factura === "CONTADO") {
@@ -452,20 +452,20 @@ function buscarIdCuenta() {
             $("#mensajes").html(json.mensaje);
             $("#id_cuenta").val(json.id_cuenta);
             $("#nro_cuota").val(json.nro_cuota);
-            $("#id_factura_venta").val(json.id_factura_venta);
+            $("#id_factura_cuenta").val(json.id_factura_cuenta);
             $("#total").val(json.total);
             //$("#vuelto").val(json.vuelto);
             //$("#id_cliente").val(json.id_cliente);
             //$("#nombre_cliente").val(json.nombre_cliente);
             //$("#ruc_cliente").val(json.ruc_cliente);
-            //$("#fecha_factura_venta").val(json.fecha_factura_venta);
+            //$("#fecha_factura_cuenta").val(json.fecha_factura_cuenta);
             //$("#id_tipo_factura").val(json.id_tipo_factura);
             //$("#nombre_tipo_factura").val(json.nombre_tipo_factura);
             /*$("#subtotal_5").val(json.subtotal_5);
              $("#subtotal_10").val(json.subtotal_10);
              $("#subtotal_exenta").val(json.subtotal_exenta);*/
             //$("#cantidad_cuotas").val(json.cantidad_cuotas);
-            //var fecha = $("#fecha_factura_venta").serialize();
+            //var fecha = $("#fecha_factura_cuenta").serialize();
 
             //$("#contenidoDetalle").html(json.contenido_detalle);
             /*if (json.nombre_tipo_factura === "CONTADO") {
@@ -487,11 +487,11 @@ function buscarIdCuenta() {
     });
 }
 
-function buscarNombreFacturaVenta() {
+function buscarNombreFacturaCuenta() {
     var datosFormulario = $("#formBuscar").serialize();
     $.ajax({
         type: 'POST',
-        url: 'jsp/buscarNombreVenta.jsp',
+        url: 'jsp/buscarNombreCuenta.jsp',
         data: datosFormulario,
         dataType: 'json',
         beforeSend: function (objeto) {
@@ -505,9 +505,9 @@ function buscarNombreFacturaVenta() {
             $("tbody tr").on("click", function () {
                 var id = $(this).find("td:first").html();
                 $("#panelBuscar").html("");
-                $("#id_factura_venta").val(id);
+                $("#id_factura_cuenta").val(id);
                 $("#nombre_cliente").focus();
-                buscarIdVenta();
+                buscarIdCuenta();
                 $("#buscar").fadeOut("slow");
                 $("#panelLinea").fadeIn("slow");
             });
@@ -541,7 +541,7 @@ function buscarNombreCuenta() {
                 var id = $(this).find("td:first").html();
                 //var id1 = $(this).find("td:second").html();
                 $("#panelBuscar").html("");
-                //$("#id_factura_venta").val(id1);
+                //$("#id_factura_cuenta").val(id1);
                 $("#id_cuenta").val(id);
                 //$("#total").val(json.total);
                 buscarIdCuenta();
@@ -581,10 +581,10 @@ function validarFormulario() {
 
 function validarFormularioDetalle() {
     var valor = true;
-    if ($("#id_factura_venta").val().trim() === "" || $("#id_factura_venta").val().trim() === "0") {
+    if ($("#id_factura_cuenta").val().trim() === "" || $("#id_factura_cuenta").val().trim() === "0") {
         valor = false;
-        $("#mensajes").html("Seleccionar Venta.");
-        $("#id_venta").focus();
+        $("#mensajes").html("Seleccionar Cuenta.");
+        $("#id_cuenta").focus();
     }
     if ($("#id_forma_pago").val().trim() === "" || $("#id_forma_pago").val().trim() === "0") {
         valor = false;
@@ -679,15 +679,15 @@ function buscarNombreForma_pago() {
 
 function agregarLinea() {
     $("#id_detallecaja").val("0");
-    $("#id_factura_venta").val("0");
-    $("#numero_factura_venta").val("");
+    $("#id_factura_cuenta").val("0");
+    $("#numero_factura_cuenta").val("");
     // $("#costo_producto").val("0");
     //  $("#iva_producto").val("");
     //  $("#cantidad_productocaja").val("0");
     $("#panelLinea").fadeIn("slow");
     $("#panelPrograma").fadeOut("slow");
-    $("#id_factura_venta").focus();
-    $("#id_factura_venta").select();
+    $("#id_factura_cuenta").focus();
+    $("#id_factura_cuenta").select();
     $("#botonAgregarLinea").prop('disabled', false);
     $("#botonModificarLinea").prop('disabled', true);
     $("#botonEliminarLinea").prop('disabled', true);
@@ -695,8 +695,8 @@ function agregarLinea() {
 }
 function editarLinea(id) {
     $("#id_detallecaja").val(id);
-    $("#id_factura_venta").val("0");
-    //$("#numero_factura_venta").val("");
+    $("#id_factura_cuenta").val("0");
+    //$("#numero_factura_cuenta").val("");
 //    $("#costo_producto").val("");
 //    $("#iva_producto").val("");
 //    $("#cantidad_productocaja").val("0");
@@ -716,11 +716,11 @@ function editarLinea(id) {
     $("#id_cuenta").select(); 
     }*/
     if ($("#id_tfac").val().trim() === "CONTADO"){
-       $("#id_factura_venta").focus();
-    $("#id_factura_venta").select(); 
+       $("#id_factura_cuenta").focus();
+    $("#id_factura_cuenta").select(); 
     }
-    //$("#id_factura_venta").focus();
-    //$("#id_factura_venta").select();
+    //$("#id_factura_cuenta").focus();
+    //$("#id_factura_cuenta").select();
     $("#botonAgregarLinea").prop('disabled', true);
     $("#botonModificarLinea").prop('disabled', false);
     $("#botonEliminarLinea").prop('disabled', false);
@@ -742,11 +742,11 @@ function buscarIdCajaDetalle() {
         },
         success: function (json) {
             $("#mensajes").html(json.mensaje);
-            $("#id_factura_venta").val(json.id_factura_venta);
-            $("#numero_factura_venta").val(json.numero_factura_venta);
+            $("#id_factura_cuenta").val(json.id_factura_cuenta);
+            $("#numero_factura_cuenta").val(json.numero_factura_cuenta);
             $("#id_forma_pago").val(json.id_forma_pago);
             //$("#nombre_forma_pago").val(json.nombre_forma_pago);
-//            buscarIdVenta();
+//            buscarIdCuenta();
 //            var total1 = $("#total").val();
 //            alert("total "+ total1);
 //            var importe1 = $("#importe").val(json.importe);
@@ -817,8 +817,8 @@ function agregarRecibo() {
 
 function limpiarLinea() {
     $("#id_detallecaja").val("0");
-    $("#id_factura_venta").val("0");
-    //$("#numero_factura_venta").val("");
+    $("#id_factura_cuenta").val("0");
+    //$("#numero_factura_cuenta").val("");
 //    $("#costo_producto").val("");
 //    $("#iva_producto").val("");
 //    $("#cantidad_productocaja").val("0");
@@ -839,11 +839,11 @@ function limpiarLinea() {
     $("#id_cuenta").select(); 
     }*/
     /*if ($("#id_tfac").val().trim() === "CONTADO"){
-       $("#id_factura_venta").focus();
-    $("#id_factura_venta").select(); 
+       $("#id_factura_cuenta").focus();
+    $("#id_factura_cuenta").select(); 
     }*/
-    //$("#id_factura_venta").focus();
-    //$("#id_factura_venta").select();
+    //$("#id_factura_cuenta").focus();
+    //$("#id_factura_cuenta").select();
     //$("#botonAgregarLinea").prop('disabled', false);
     //$("#botonModificarLinea").prop('disabled', true);
     //$("#botonEliminarLinea").prop('disabled', true);

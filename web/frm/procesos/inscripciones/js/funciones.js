@@ -148,15 +148,16 @@ function buscarNombreInscripcion() {
        success: function (json){
            $("#mensajes").html(json.mensaje);
            $("#contenidoBusqueda").html(json.contenido);
-           $("#contenidoBusqueda").fadeIn("slow");
+           $("#contenidoBusqueda").fadeIn("fast");
            $("tbody tr").on("click", function(){
               var id = $(this).find("td:first").html();
               $("#panelBuscar").html("");
               $("#id_inscripcion").val(id);
-              $("#nombre_alumno").focus();
+              $("#nombre_alumno").focus();              
               buscarIdInscripcion();
-              $("#buscar").fadeOut("slow");
-              $("#panelPrograma").fadeIn("slow");
+             
+              $("#buscar").fadeOut("fast");
+              $("#panelPrograma").fadeIn("fast");
           });
        },
        error: function(e) {
@@ -193,20 +194,7 @@ function buscarIdAlumno() {
             $("#telefono_medico").val(json.telefono_medico);                        
             $("#id_sexo").val(json.id_sexo);
             $("#nombre_sexo").val(json.nombre_sexo);
-            
-            
-           // console.log(json.nuevo);
-           /* if (json.nuevo === "true") {
-               $("#botonAgregar").prop('disabled', false);
-               $("#botonModificar").prop('disabled', true);
-               $("#botonEliminar").prop('disabled', true);
-            siguienteCampo("#nombre_alumno", "#botonAgregar", true);
-           } else {
-               $("#botonAgregar").prop('disabled', true);
-               $("#botonModificar").prop('disabled', false);
-               $("#botonEliminar").prop('disabled', true);
-               siguienteCampo("#nombre_alumno", "#botonModificar", true);
-           }*/
+        
         },
         error: function (e) {
             $("#mensajes").html("No se pudo modificar los datos.");
@@ -233,15 +221,15 @@ function buscarNombreAlumno() {
        success: function (json){
            $("#mensajes").html(json.mensaje);
            $("#contenidoBusqueda").html(json.contenido);
-           $("#contenidoBusqueda").fadeIn("slow");
+           $("#contenidoBusqueda").fadeIn("fast");
            $("tbody tr").on("click", function(){
               var id = $(this).find("td:first").html();
               $("#panelBuscar").html("");
               $("#id_alumno").val(id);
               $("#nombre_alumno").focus();
                 buscarIdAlumno();
-              $("#buscar").fadeOut("slow");
-              $("#panelPrograma").fadeIn("slow");
+              $("#buscar").fadeOut("fast");
+              $("#panelPrograma").fadeIn("fast");
           });
        },
        error: function(e) {
@@ -286,8 +274,8 @@ function buscarIdConvocatoria() {
             $("#mensajes").html("Enviando datos al Servidor ...");
         },
         success: function (json) {
-            $("#mensajes").html(json.mensaje);
-            $("#id_convocatoria").val(json.id_convocatoria);                      
+           $("#mensajes").html(json.mensaje);
+           $("#id_convocatoria").val(json.id_convocatoria);                      
            $("#nombre_convocatoria").val(json.nombre_convocatoria);   
            $("#monto_convocatoria").val(json.monto_convocatoria);            
            $("#codigo_convocatoria").val(json.codigo_convocatoria);
@@ -316,7 +304,7 @@ function buscarIdConvocatoriaCodigo() {
         success: function (json) {
             $("#mensajes").html(json.mensaje);
             $("#id_convocatoria").val(json.id_convocatoria);                      
-            $("#nombre_convocatoria").val(json.id_convocatoria);                      
+            $("#nombre_convocatoria").val(json.nombre_convocatoria);                      
             $("#id_curso").val(json.id_curso);
             $("#nombre_curso").val(json.nombre_curso);
             $("#id_turno").val(json.id_turno);
@@ -349,7 +337,7 @@ function buscarNombreConvocatoria() {
         success: function (json) {
             $("#mensajes").html(json.mensaje);
             $("#contenidoBusqueda").html(json.contenido);
-            $("#contenidoBusqueda").fadeIn("slow");
+            $("#contenidoBusqueda").fadeIn("fast");
             $("tbody tr").on("click", function () {
                 var id = $(this).find("td:first").html();
                 $("#panelBuscar").html("");
@@ -357,8 +345,8 @@ function buscarNombreConvocatoria() {
                 $("#nombre_convocatoria").focus();
                 // TURNO ADD
                 buscarIdConvocatoria();
-                $("#buscar").fadeOut("slow");
-                $("#panelPrograma").fadeIn("slow");
+                $("#buscar").fadeOut("fast");
+                $("#panelPrograma").fadeIn("fast");
             });
         },
         error: function (e) {
@@ -429,7 +417,7 @@ function buscarCuota() {
        success: function (json){
            $("#mensajes").html(json.mensaje);
            $("#contenidoBusqueda").html(json.contenido);
-           $("#contenidoBusqueda").fadeIn("slow");
+           $("#contenidoBusqueda").fadeIn("fast");
            $("tbody tr").on("click", function(){
               var id = $(this).find("td:first").html();
               $("#panelBuscar").html("");
@@ -465,7 +453,7 @@ function buscarCuotaCi() {
        success: function (json){
            $("#mensajes").html(json.mensaje);          
            $("#contenidoBusqueda").html(json.contenido);
-           $("#contenidoBusqueda").fadeIn("slow");
+           $("#contenidoBusqueda").fadeIn("fast");
            $("tbody tr").on("click", function(){
               var id = $(this).find("td:first").html();
               $("#panelBuscar").html("");

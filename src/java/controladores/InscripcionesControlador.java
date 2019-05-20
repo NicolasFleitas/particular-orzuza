@@ -209,15 +209,10 @@ public class InscripcionesControlador {
     
     
     /* BUSCAR CUOTAS VENCIDAS POR NOMBRE */
-     public static String buscarCuota(String nombre, Date fecha_buscar,  int pagina) {
-      
+     public static String buscarCuota(String nombre, Date fecha_buscar,  int pagina) {      
         int offset = (pagina - 1) * Utiles.REGISTROS_PAGINA;
-        String valor = "";
-        
-       //java.sql.Date hoy = new java.sql.Date(new java.util.Date().getTime());
-                           
-        if (Conexion.conectar()) {
-            
+        String valor = "";                                        
+        if (Conexion.conectar()) {            
             try {    
                 String sql= "SELECT * FROM cuentas_cte cta, inscripciones i, alumnos a"
                         + " WHERE "                        
@@ -230,10 +225,8 @@ public class InscripcionesControlador {
                         + "cta.vencimiento_cuota < '"+ fecha_buscar +"'"
                         + " AND "
                         + "(a.nombre_alumno) like '%" +nombre.toUpperCase() + "%'"
-                        + " ORDER BY vencimiento_cuota, i.id_inscripcion offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;
-                        
-               System.out.println("SQL BUSCAR CUOTA por NOMBRE --> "+ sql);
-               
+                        + " ORDER BY vencimiento_cuota, i.id_inscripcion offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;                        
+               System.out.println("BUSCAR CUOTA por NOMBRE --> "+ sql);               
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                     ResultSet rs = ps.executeQuery();
                     String tabla = "";
@@ -241,7 +234,7 @@ public class InscripcionesControlador {
                         tabla += "<tr>"
                                + "<td>" + rs.getString("id_inscripcion") + "</td>"
                                + "<td>" + rs.getDate("vencimiento_cuota") + "</td>"  
-                                + "<td>" + rs.getString("nroci_alumno") + "</td>"
+                               + "<td>" + rs.getString("nroci_alumno") + "</td>"
                                + "<td>" + rs.getString("nombre_alumno") + "</td>"
                                + "<td>" + rs.getString("cuota_cuota") + "</td>"
                                + "<td>" + rs.getInt("monto_cuota") + "</td>"      

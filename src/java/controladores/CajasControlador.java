@@ -78,10 +78,11 @@ public class CajasControlador {
         Cajas cajas = null;
         if (Conexion.conectar()) {
             try {
-                String sql = "SELECT * FROM  cajas c "
-                        + "left join usuarios u on c.id_usuario=u.id_usuario "
-                        // + "left join tipospagos t on p.id_tipopago=t.id_tipopago "
-                        + "WHERE estado_caja='ABIERTO' and c.id_usuario=?";
+                String sql = "SELECT * FROM  cajas c, usuarios u "
+                        + "WHERE c.id_usuario = u.id_usuario"
+                        + " AND "
+                        + "estado_caja like 'ABIERTO' "
+                        + "AND c.id_usuario = ?";
                 System.out.println(sql+usuario);
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                   
@@ -93,7 +94,6 @@ public class CajasControlador {
                         cajas.setFecha_apertura(rs.getDate("fecha_apertura"));
                         cajas.setMonto_inicial(rs.getInt("monto_inicial"));
                         cajas.setEstado_caja(rs.getString("estado_caja"));
-
                     }
 
                     ps.close();
@@ -157,8 +157,7 @@ public class CajasControlador {
                     + "values('"
                     + caja.getFecha_apertura() + "','"
                     + caja.getMonto_inicial() + "','"
-                    + caja.getEstado_caja() + "','"
-                    
+                    + caja.getEstado_caja() + "','"                    
                     + v1 + "')";
 
             System.out.println("--> " + sql);

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cuotasAlumnos" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aca1b5e9-e028-4b2a-8362-4ce7b0da060e">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="nroci_alumno" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_inscripcion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT cta.id_cuenta, cta.vencimiento_cuota,cta.cuota_cuota, cta.monto_cuota, cta.total_cuota, cta.estado, i.id_inscripcion, a.nombre_alumno, a.nroci_alumno, cv.id_convocatoria, cv.nombre_convocatoria, cv.convocatoria_estado
+FROM cuentas_cte cta, inscripciones i, alumnos a, convocatorias cv
+WHERE cta.id_inscripcion = i.id_inscripcion
+AND cta.id_inscripcion = $P{id_inscripcion}
+AND i.id_alumno = a.id_alumno
+AND a.nroci_alumno = $P{nroci_alumno}
+AND i.id_convocatoria = cv.id_convocatoria
+ORDER BY cta.vencimiento_cuota,cta.cuota_cuota]]>
+	</queryString>
+	<field name="id_cuenta" class="java.lang.Integer"/>
+	<field name="vencimiento_cuota" class="java.sql.Date"/>
+	<field name="cuota_cuota" class="java.lang.Integer"/>
+	<field name="monto_cuota" class="java.lang.Integer"/>
+	<field name="total_cuota" class="java.lang.Integer"/>
+	<field name="estado" class="java.lang.String"/>
+	<field name="id_inscripcion" class="java.lang.Integer"/>
+	<field name="nombre_alumno" class="java.lang.String"/>
+	<field name="nroci_alumno" class="java.lang.Integer"/>
+	<field name="id_convocatoria" class="java.lang.Integer"/>
+	<field name="nombre_convocatoria" class="java.lang.String"/>
+	<field name="convocatoria_estado" class="java.lang.String"/>
+	<group name="id_cuenta">
+		<groupExpression><![CDATA[$F{id_cuenta}]]></groupExpression>
+	</group>
+	<group name="id_inscripcion">
+		<groupExpression><![CDATA[$F{id_inscripcion}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="43" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="692" y="19" width="100" height="20" uuid="00be8834-3a8d-471e-a87a-a190a3589b3a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="202" y="0" width="263" height="39" uuid="ff34d69f-55b6-48c4-8af9-035e498ed50b"/>
+				<textElement>
+					<font size="18" isBold="true" isItalic="true" isUnderline="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Estado de cuenta del alumno]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="51" y="0" width="100" height="20" uuid="54c35668-94ea-46d5-b9e6-7ae6441677b3"/>
+				<textFieldExpression><![CDATA[$F{nombre_alumno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="20" width="100" height="20" uuid="fe9e2c6a-f18a-48e4-9c6c-8092508f2d25"/>
+				<textFieldExpression><![CDATA[$F{nroci_alumno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="0" width="100" height="20" uuid="9efebe23-43ca-49a5-be4d-a3e3d5fba2dd"/>
+				<textFieldExpression><![CDATA[$F{nombre_convocatoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="20" width="71" height="20" uuid="ca54adba-a702-40ac-b354-829f74400f35"/>
+				<textFieldExpression><![CDATA[$F{convocatoria_estado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="51" height="20" uuid="6ebde2cc-889c-4c4c-95fa-d723ffcdf445"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Alumno:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="20" width="37" height="20" uuid="4dc24143-6704-43ce-a8da-af1c0122bfb2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[C.I.Nº.:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="0" width="63" height="20" uuid="cac5d7f9-db69-4e5c-97fc-e0fe24a434ee"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inscripto al:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="20" width="37" height="20" uuid="9ba0fab0-0c4e-4ea0-8058-fd900bc52371"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="40" width="802" height="1" uuid="f7772a90-5359-4a3c-82b4-12115590bfb3"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="17" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="37" height="15" uuid="6dffe9cd-af71-41cb-b90d-8c09940ff0db"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="0" width="64" height="15" uuid="2a59de93-0e53-4197-9bfc-8c88ac4a0cb5"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="104" y="0" width="61" height="15" uuid="0fac8144-fb30-4b04-801e-038e869ee81e"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="165" y="0" width="100" height="15" uuid="1c0c4dae-4d75-4832-8549-dd55ea7c2a80"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado de la Cuota]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="0" width="72" height="15" uuid="c30e73f9-2ce6-4e9f-9e93-c588c8385246"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vencimiento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="37" height="20" uuid="81a5ac5e-35d5-4bc5-9393-95d4cc27f58e"/>
+				<textFieldExpression><![CDATA[$F{cuota_cuota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="165" y="0" width="100" height="20" uuid="056851a6-b529-4e60-b357-93b022721b0b"/>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="104" y="0" width="61" height="20" uuid="ae00c2ae-afed-4654-81c0-76c7bb9c2750"/>
+				<textFieldExpression><![CDATA[$F{total_cuota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="37" y="0" width="64" height="20" uuid="ed67fb13-a814-4bd9-be70-ba4d1f72ec19"/>
+				<textFieldExpression><![CDATA[$F{monto_cuota}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="false">
+				<reportElement x="279" y="2" width="72" height="20" uuid="0a50fa92-b5e5-4b0b-9797-62c801fa1313"/>
+				<textFieldExpression><![CDATA[$F{vencimiento_cuota}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
