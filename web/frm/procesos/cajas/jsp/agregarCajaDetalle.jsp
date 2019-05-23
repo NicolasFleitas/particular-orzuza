@@ -11,8 +11,8 @@
     int id_detallecaja = Integer.parseInt(request.getParameter("id_detallecaja"));
     int importe = Integer.parseInt(request.getParameter("importe"));
     int id_caja = Integer.parseInt(request.getParameter("id_caja"));
-    //int id_cuenta = Integer.parseInt(request.getParameter("id_cuenta"));
-   // int nro_cuota = Integer.parseInt(request.getParameter("nro_cuota"));
+    int id_cuenta = Integer.parseInt(request.getParameter("id_cuenta"));
+    int nro_cuota = Integer.parseInt(request.getParameter("nro_cuota"));
    // int id_factura_venta = Integer.parseInt(request.getParameter("id_factura_venta"));
     //int id_factura_venta1 = Integer.parseInt(request.getParameter("sid_factura_venta"));
     //int numero_factura_venta = Integer.parseInt(request.getParameter("numero_factura_venta"));

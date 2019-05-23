@@ -1,13 +1,13 @@
-<%@page  import="controladores.TurnosControlador"%>
+<%@page  import="controladores.MateriasControlador"%>
 <%@page  import="org.json.simple.JSONObject"%>
 <%@page  import="java.sql.ResultSet"%>
 <%
-    String nombre_turno = request.getParameter("bnombre");
+    String nombre_materia = request.getParameter("bnombre");
     int pagina = Integer.parseInt(request.getParameter("bpagina"));
     
 
     String mensaje = "Busqueda exitosa";
-    String contenido = TurnosControlador.buscarNombre(nombre_turno, pagina);
+    String contenido = MateriasControlador.buscarNombre(nombre_materia, pagina);
     
     JSONObject obj = new JSONObject();
     obj.put("mensaje", mensaje);

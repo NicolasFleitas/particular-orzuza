@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controladores;
 
 import java.sql.PreparedStatement;
@@ -15,10 +10,6 @@ import modelos.Usuarios;
 import utiles.Conexion;
 import utiles.Utiles;
 
-/**
- *
- * @author Administrator
- */
 public class CajasControlador {
 
     public static Cajas buscarId(int id) {
@@ -37,7 +28,7 @@ public class CajasControlador {
                         cajas = new Cajas();
                         cajas.setId_caja(rs.getInt("id_caja"));
                         cajas.setFecha_apertura(rs.getDate("fecha_apertura"));
-                        cajas.setMonto_inicial(rs.getInt("monto_inicial"));
+                       // cajas.setMonto_inicial(rs.getInt("monto_inicial"));
                         cajas.setEstado_caja(rs.getString("estado_caja"));
 
                     }
@@ -52,28 +43,6 @@ public class CajasControlador {
         return cajas;
     }
     
-    
-        /*public static Cajas buscarIdcaja(Cajas cajas) {
-        if (Conexion.conectar()){
-            String sql = "SELECT * FROM  cajas where id_caja='"+cajas.getId_caja()+"'";
-            System.out.println("sql "+sql);
-            try {
-                ResultSet rs = Conexion.getSt().executeQuery(sql);
-                if (rs.next()){
-                    cajas = new Cajas();
-                        cajas.setId_caja(rs.getInt("id_caja"));
-                        cajas.setFecha_apertura(rs.getDate("fecha_apertura"));
-                        cajas.setMonto_inicial(rs.getInt("monto_inicial"));
-                        cajas.setEstado_caja(rs.getString("estado_caja"));
-                } 
-            } catch (SQLException ex) {
-                System.out.println("Error: " + ex);
-            }
-        }
-        return cajas;
-    }*/
-    
-    
     public static Cajas buscarIdestado(int usuario) throws SQLException {
         Cajas cajas = null;
         if (Conexion.conectar()) {
@@ -83,16 +52,15 @@ public class CajasControlador {
                         + " AND "
                         + "estado_caja like 'ABIERTO' "
                         + "AND c.id_usuario = ?";
-                System.out.println(sql+usuario);
-                try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
-                  
+                System.out.println("Buscar estado caja " + sql+ "usuario: " + usuario);
+                try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {                  
                     ps.setInt(1, usuario);
                     ResultSet rs = ps.executeQuery();
                     if (rs.next()) {
                         cajas = new Cajas();
                         cajas.setId_caja(rs.getInt("id_caja"));
                         cajas.setFecha_apertura(rs.getDate("fecha_apertura"));
-                        cajas.setMonto_inicial(rs.getInt("monto_inicial"));
+                       // cajas.setMonto_inicial(rs.getInt("monto_inicial"));
                         cajas.setEstado_caja(rs.getString("estado_caja"));
                     }
 
@@ -152,15 +120,14 @@ public class CajasControlador {
         if (Conexion.conectar()) {
             int v1 = caja.getUsuario().getId_usuario();
 
-            String sql = "insert into cajas (fecha_apertura"
-                    + ", monto_inicial, estado_caja, id_usuario)"
+            String sql = "insert into cajas (fecha_apertura,estado_caja, id_usuario)"
                     + "values('"
                     + caja.getFecha_apertura() + "','"
-                    + caja.getMonto_inicial() + "','"
+                 // + caja.getMonto_inicial() + "','"
                     + caja.getEstado_caja() + "','"                    
                     + v1 + "')";
 
-            System.out.println("--> " + sql);
+            System.out.println("Agregar caja: --> " + sql);
             try {
                 Conexion.getSt().executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
                 ResultSet keyset = Conexion.getSt().getGeneratedKeys();
@@ -174,10 +141,8 @@ public class CajasControlador {
             } catch (SQLException ex) {
                 System.out.println("--> " + ex.getLocalizedMessage());
             }
-
             Conexion.cerrar();
         }
-
         return valor;
     }
 
@@ -258,4 +223,25 @@ public class CajasControlador {
         Conexion.cerrar();
         return valor;
     }
+    
+     
+        /*public static Cajas buscarIdcaja(Cajas cajas) {
+        if (Conexion.conectar()){
+            String sql = "SELECT * FROM  cajas where id_caja='"+cajas.getId_caja()+"'";
+            System.out.println("sql "+sql);
+            try {
+                ResultSet rs = Conexion.getSt().executeQuery(sql);
+                if (rs.next()){
+                    cajas = new Cajas();
+                        cajas.setId_caja(rs.getInt("id_caja"));
+                        cajas.setFecha_apertura(rs.getDate("fecha_apertura"));
+                        cajas.setMonto_inicial(rs.getInt("monto_inicial"));
+                        cajas.setEstado_caja(rs.getString("estado_caja"));
+                } 
+            } catch (SQLException ex) {
+                System.out.println("Error: " + ex);
+            }
+        }
+        return cajas;
+    }*/
 }

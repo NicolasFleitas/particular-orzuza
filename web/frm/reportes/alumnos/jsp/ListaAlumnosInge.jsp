@@ -13,7 +13,7 @@
     String realPath=this.getServletContext().getRealPath(dirPath);
     String listado=request.getParameter("l");
     String curso= request.getParameter("d");
-    String turno= request.getParameter("h");
+    //String turno= request.getParameter("h");
     String jasperReport=listado+".jasper";
     JasperPrint print=null;
     Connection conn=null;
@@ -24,8 +24,8 @@
         Conexion.conectar();
         conn=Conexion.getConn();
         Map parameters=new HashMap();
-        parameters.put("CURSO",curso);
-        parameters.put("TURNO",turno);
+       parameters.put("CURSO",curso);
+       // parameters.put("TURNO",turno);
         //parameters.put("USUARIO",clienteLogueado.getCliente_cliente());
         print =JasperFillManager.fillReport(realPath+"//"+jasperReport, parameters,conn);
         response.setContentType("application/pdf");

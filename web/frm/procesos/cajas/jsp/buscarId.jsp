@@ -38,7 +38,7 @@
     obj.put("nuevo", nuevo);
     obj.put("id_caja", caja.getId_caja());
     obj.put("fecha_apertura", String.valueOf(caja.getFecha_apertura()));
-    obj.put("monto_inicial", caja.getMonto_inicial());
+    //obj.put("monto_inicial", caja.getMonto_inicial());
     obj.put("estado_caja", caja.getEstado_caja());
     obj.put("contenido_detalle", contenido_detalle);
     out.print(obj);

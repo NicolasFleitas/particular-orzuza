@@ -153,6 +153,7 @@ function buscarNombreConvocatoria() {
         }
     });
 }
+
 function agregarConvocatoria() {
     var datosFormulario = $("#formPrograma").serialize();
     $.ajax({

@@ -1,4 +1,3 @@
-
 <%@page import="modelos.Usuarios"%>
 <%@page import="utiles.Utiles"%>
 <%@page import="controladores.CajasControlador"%>
@@ -9,7 +8,8 @@
     int id_caja = Integer.parseInt(request.getParameter("id_caja"));
     String sfecha_apertura = request.getParameter("fecha_apertura");
     java.sql.Date fecha_apertura = Utiles.stringToSqlDate(sfecha_apertura);
-    int monto_inicial = Integer.parseInt(request.getParameter("monto_inicial"));
+    
+    //int monto_inicial = Integer.parseInt(request.getParameter("monto_inicial"));
     String estado_caja = "ABIERTO";
    // int id_usuario = Integer.parseInt(request.getParameter("sid_usuario"));
     int id_usuario = 1;
@@ -21,7 +21,7 @@
     Cajas caja = new Cajas();
     caja.setId_caja(id_caja);
     caja.setFecha_apertura(fecha_apertura);
-    caja.setMonto_inicial(monto_inicial);
+    //caja.setMonto_inicial(monto_inicial);
     caja.setEstado_caja(estado_caja);
     caja.setUsuario(usuario);
     

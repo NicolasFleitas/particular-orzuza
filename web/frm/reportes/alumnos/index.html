@@ -24,48 +24,30 @@
                     </div>
                     <div class="col-md-2">
                         <select id="listado" class="form-control">
-                            <option value="alumnos">Alumnos</option>
+                            <option value="ListaAlumnosInge">Lista de alumnos</option>
                         </select>
                     </div>
                 </div>
 
                <div class="row">
                     <div class="col-md-1">
-                        <span>Curso</span>
+                        <span>Materia</span>
                     </div>
                     <div class="col-md-1">
-                        <input id="id_curso" name="id_curso" type="text" class="form-control input-sm" placeholder="Id"
+                        <input id="id_materia" name="id_materia" type="text" class="form-control input-sm" placeholder="Id"
                             onkeypress="return SoloNumeros(event)">
                     </div>
                     <div class="col-md-1">
-                        <button id="botonBuscarIdCurso" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                        <button id="botonBuscarIdMateria" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
                     </div>
 
                     <div class="col-md-3">
-                        <input id="nombre_curso" name="nombre_curso" type="text" class="form-control input-sm"
-                            placeholder="Nombre Curso" disabled="disabled">
+                        <input id="nombre_materia" name="nombre_materia" type="text" class="form-control input-sm"
+                               placeholder="Nombre Materia">
                     </div>
                 </div>
 
                 <!-- TURNO -->
-
-                <div class="row">
-                    <div class="col-md-1">
-                        <span>Turno</span>
-                    </div>
-                    <div class="col-md-1">
-                        <input id="id_turno" name="id_turno" type="text" class="form-control input-sm" placeholder="Id"
-                            onkeypress="return SoloNumeros(event)">
-                    </div>
-                    <div class="col-md-1">
-                        <button id="botonBuscarIdTurno" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
-                    </div>
-
-                    <div class="col-md-3">
-                        <input id="nombre_turno" name="nombre_turno" type="text" class="form-control input-sm"
-                            placeholder="Nombre Turno" disabled="disabled">
-                    </div>
-                </div>
 
             </form>
         </div>
@@ -87,31 +69,21 @@
 
     <script>
         verificarSesion(true);
-        $("#nombre_curso").focus();
+        $("#nombre_materia").focus();
 
-        // siguienteCampo("#nombre_curso","#nombre_turno",false); 
+        // siguienteCampo("#nombre_materia","#nombre_turno",false); 
 
-        $("#id_turno").focusout(function (event) {
-            if ($("#id_turno").val() === "") {
-                $("#id_turno").val("0");
+       
+
+        $("#id_materia").focusout(function (event) {
+            if ($("#id_materia").val() === "") {
+                $("#id_materia").val("0");
             }
-            buscarIdTurno();
-        });
-        $("#botonBuscarIdTurno").on('click', function () {
-            $("#buscar").load("buscarTurno.html");
-            $("#buscar").fadeIn("slow");
-            $("#panelPrograma").fadeOut("slow");
+            buscarIdMateria();
         });
 
-        $("#id_curso").focusout(function (event) {
-            if ($("#id_curso").val() === "") {
-                $("#id_curso").val("0");
-            }
-            buscarIdCurso();
-        });
-
-        $("#botonBuscarIdCurso").on('click', function () {
-            $("#buscar").load("buscarCurso.html");
+        $("#botonBuscarIdMateria").on('click', function () {
+            $("#buscar").load("buscarMateria.html");
             $("#buscar").fadeIn("slow");
             $("#panelPrograma").fadeOut("slow");
         });
@@ -119,11 +91,12 @@
 
         $("#botonImprimir").on('click', function () {
             var l = $("#listado").val();
-            var d = $("#nombre_curso").val();
-            var h = $("#nombre_turno").val();
-            var jsp = "jsp/alumnos.jsp";
-            window.open(jsp + "?l=" + l + "&d=" + d + "&h=" + h);
+            var d = $("#nombre_materia").val();
+          //  var h = $("#nombre_turno").val();
+            var jsp = "jsp/ListaAlumnosInge.jsp";
+            window.open(jsp + "?l=" + l + "&d=" + d );
         });
+        
         $("#botonSalir").on('click', function () {
             location.href = "../../../menu.html";
         });

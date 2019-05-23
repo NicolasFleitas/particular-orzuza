@@ -1,5 +1,5 @@
  <div id="panelBuscar" class="panel panel-primary">
-                <div class="panel-heading centrado">Buscar Turnos</div>
+                <div class="panel-heading centrado">Buscar Materias</div>
                 <div class="panel-body">
                     <form  id="formBuscar">
                         <input type="hidden" id="bpagina" name="bpagina" value="1" >
@@ -46,13 +46,13 @@
         <script src="../../../js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/funciones.js" type="text/javascript"></script>
         <script>
-        buscarNombreTurno();
+        buscarNombreMateria();
         $("#bnombre").focus();
        // siguienteCampo("#bnombre", "#botonBuscar", false);
         $("#botonBuscar").on("click", function(){
             $("#contenidoBusqueda").html("");
             $("#bpagina").val("1");
-            buscarNombreTurno();
+            buscarNombreMateria();
             $("#bnombre").focus();
         });   
         $("#anterior").on("click", function(){
@@ -61,13 +61,13 @@
             if (pag > 1) {
                 $("#bpagina").val(pag - 1);
             }
-            buscarNombreTurno();
+            buscarNombreMateria();
         });
         $("#siguiente").on("click", function(){
             $("#contenidoBusqueda").html("");
             var pag = parseInt($("#bpagina").val());            
             $("#bpagina").val(pag + 1);            
-            buscarNombreTurno();
+            buscarNombreMateria();
         });
         
         $("#botonSalirBuscar").on("click", function(){

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListaAlumnosInge" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9d960c1-6829-41c9-89ad-0a5c596586c6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="CJ_DB_CONEXION"/>
+	<parameter name="CURSO" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT *
+FROM inscripciones i,
+	alumnos a,
+	convocatorias cv,
+	tipoconvocatorias tcv
+WHERE 
+	i.id_alumno = a.id_alumno 
+	 AND i.id_convocatoria = cv.id_convocatoria 
+	 AND cv.convocatoria_estado like 'HABILITADO'
+	 AND cv.id_tipoconvocatoria = tcv.id_tipoconvocatoria 
+	 AND tcv.nombre_tipoconvocatoria LIKE  $P{CURSO} 
+ORDER BY a.nombre_alumno, a.apellido_alumno]]>
+	</queryString>
+	<field name="id_inscripcion" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_inscripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscripciones"/>
+	</field>
+	<field name="id_alumno" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_alumno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscripciones"/>
+	</field>
+	<field name="id_convocatoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_convocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscripciones"/>
+	</field>
+	<field name="fecha_inscripcion" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_inscripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscripciones"/>
+	</field>
+	<field name="nro_cuotas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="nro_cuotas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscripciones"/>
+	</field>
+	<field name="vencimientocuota_inscripcion" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="vencimientocuota_inscripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="inscripciones"/>
+	</field>
+	<field name="COLUMN_7" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_alumno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alumnos"/>
+	</field>
+	<field name="nombre_alumno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_alumno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alumnos"/>
+	</field>
+	<field name="apellido_alumno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="apellido_alumno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alumnos"/>
+	</field>
+	<field name="nroci_alumno" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="nroci_alumno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alumnos"/>
+	</field>
+	<field name="fecha_nac_alumno" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_nac_alumno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alumnos"/>
+	</field>
+	<field name="id_sexo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_sexo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alumnos"/>
+	</field>
+	<field name="COLUMN_13" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_convocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatorias"/>
+	</field>
+	<field name="id_tipoconvocatoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_tipoconvocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatorias"/>
+	</field>
+	<field name="fecha_convocatoria" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_convocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatorias"/>
+	</field>
+	<field name="nombre_convocatoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_convocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatorias"/>
+	</field>
+	<field name="monto_convocatoria" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="monto_convocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatorias"/>
+	</field>
+	<field name="codigo_convocatoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="codigo_convocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatorias"/>
+	</field>
+	<field name="monto_matricula" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="monto_matricula"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatorias"/>
+	</field>
+	<field name="convocatoria_estado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="convocatoria_estado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="convocatorias"/>
+	</field>
+	<field name="COLUMN_21" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="id_tipoconvocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipoconvocatorias"/>
+	</field>
+	<field name="nombre_tipoconvocatoria" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_tipoconvocatoria"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipoconvocatorias"/>
+	</field>
+	<group name="id_inscripcion">
+		<groupExpression><![CDATA[$F{id_inscripcion}]]></groupExpression>
+	</group>
+	<group name="id_alumno">
+		<groupExpression><![CDATA[$F{id_alumno}]]></groupExpression>
+	</group>
+	<group name="id_convocatoria">
+		<groupExpression><![CDATA[$F{id_convocatoria}]]></groupExpression>
+	</group>
+	<group name="fecha_inscripcion">
+		<groupExpression><![CDATA[$F{fecha_inscripcion}]]></groupExpression>
+	</group>
+	<group name="nro_cuotas">
+		<groupExpression><![CDATA[$F{nro_cuotas}]]></groupExpression>
+	</group>
+	<group name="vencimientocuota_inscripcion">
+		<groupExpression><![CDATA[$F{vencimientocuota_inscripcion}]]></groupExpression>
+	</group>
+	<group name="COLUMN_7">
+		<groupExpression><![CDATA[$F{COLUMN_7}]]></groupExpression>
+	</group>
+	<group name="nombre_alumno">
+		<groupExpression><![CDATA[$F{nombre_alumno}]]></groupExpression>
+	</group>
+	<group name="apellido_alumno">
+		<groupExpression><![CDATA[$F{apellido_alumno}]]></groupExpression>
+	</group>
+	<group name="nroci_alumno">
+		<groupExpression><![CDATA[$F{nroci_alumno}]]></groupExpression>
+	</group>
+	<group name="fecha_nac_alumno">
+		<groupExpression><![CDATA[$F{fecha_nac_alumno}]]></groupExpression>
+	</group>
+	<group name="id_sexo">
+		<groupExpression><![CDATA[$F{id_sexo}]]></groupExpression>
+	</group>
+	<group name="COLUMN_13">
+		<groupExpression><![CDATA[$F{COLUMN_13}]]></groupExpression>
+	</group>
+	<group name="id_tipoconvocatoria">
+		<groupExpression><![CDATA[$F{id_tipoconvocatoria}]]></groupExpression>
+	</group>
+	<group name="fecha_convocatoria">
+		<groupExpression><![CDATA[$F{fecha_convocatoria}]]></groupExpression>
+	</group>
+	<group name="nombre_convocatoria">
+		<groupExpression><![CDATA[$F{nombre_convocatoria}]]></groupExpression>
+	</group>
+	<group name="monto_convocatoria">
+		<groupExpression><![CDATA[$F{monto_convocatoria}]]></groupExpression>
+	</group>
+	<group name="codigo_convocatoria">
+		<groupExpression><![CDATA[$F{codigo_convocatoria}]]></groupExpression>
+	</group>
+	<group name="monto_matricula">
+		<groupExpression><![CDATA[$F{monto_matricula}]]></groupExpression>
+	</group>
+	<group name="convocatoria_estado">
+		<groupExpression><![CDATA[$F{convocatoria_estado}]]></groupExpression>
+	</group>
+	<group name="COLUMN_21">
+		<groupExpression><![CDATA[$F{COLUMN_21}]]></groupExpression>
+	</group>
+	<group name="nombre_tipoconvocatoria">
+		<groupExpression><![CDATA[$F{nombre_tipoconvocatoria}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="220" y="0" width="99" height="20" uuid="cb667e15-91f6-4316-b12d-f1db6765774e"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Lista de Alumnos]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="450" y="0" width="100" height="20" uuid="c8119b8f-3d87-43d6-bb69-f06682b23aef"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="170" height="16" uuid="2bf50d8a-78de-40c3-9a07-bfdb476edd49"/>
+				<text><![CDATA[Correspondiente al curso/materia: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="0" width="70" height="16" uuid="4866c4f3-cb3e-4d49-b4c5-663ccb750a04"/>
+				<textFieldExpression><![CDATA[$F{nombre_tipoconvocatoria}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="0" width="55" height="15" uuid="99309e5d-1493-4bfd-acf1-e8259b8a8839">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b980d3cf-7262-4d56-97ed-8cc1a4a4b5e8"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[C.I.N.º]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="0" width="100" height="15" uuid="222c6b9a-571c-425a-9dd3-4911a7e6a9f4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8d387b12-b45d-47cf-b60b-1d079f8b9b3b"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Nombres]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="100" height="15" uuid="59004f80-98fc-4551-b1ec-240128d1159d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43ce602c-bfc0-4d89-b568-21330effb0f1"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="0" width="13" height="15" uuid="c220655a-d75f-4caa-b9c1-67523f148a36"/>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="15" width="550" height="1" uuid="9539d0d9-fe15-4985-b567-7c11da5b3b71">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="0" y="-12" width="550" height="1" uuid="f2332aea-b835-48e8-986f-24ccbbc0cf0f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="15" uuid="6bd42d94-d94a-4e90-bbd9-72b138b133e6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43ce602c-bfc0-4d89-b568-21330effb0f1"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<text><![CDATA[Asistencia]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="2" width="55" height="15" uuid="fad58f5f-23bc-420f-b298-11a4728fe799">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b980d3cf-7262-4d56-97ed-8cc1a4a4b5e8"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nroci_alumno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="2" width="100" height="15" uuid="e0ebaff3-98d5-41a6-b1df-2f93e91d2192">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8d387b12-b45d-47cf-b60b-1d079f8b9b3b"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nombre_alumno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="2" width="100" height="15" uuid="b3a166f6-f285-4272-b71f-11dbe8c7a78d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43ce602c-bfc0-4d89-b568-21330effb0f1"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{apellido_alumno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="2" width="15" height="15" uuid="c7d2461e-0e7c-4971-84ae-c3ee1f4b61e2">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="310" y="2" width="30" height="15" uuid="8715d71e-99df-488c-a187-ede6d66d02c6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="27" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

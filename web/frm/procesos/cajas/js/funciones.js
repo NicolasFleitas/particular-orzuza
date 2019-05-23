@@ -1,36 +1,47 @@
-function hidden() {
-    var t = $("#id_tfac").val();
-    
-    if (t === "1") {
-
-
-        $("#tf").prop('hidden', false);
-        $("#tf1").prop('hidden', true);
-        $("#id_factura_cuenta").prop('readonly', false);
-        $("#id_cuenta").val(0);
-        $("#id_factura_cuenta").val(0);
-        $("#total").val(0);
-        $("#vuelto").prop('style', 'color: black');
-        $("#importe").val(0);
-        $("#id_forma_pago").val(0);
-        $("#vuelto").val(0);
-
-    }else{
-        if (t === "2"){
-            $("#tf").prop('hidden', true);
-            $("#tf1").prop('hidden', false);
-            $("#id_factura_cuenta").prop('readonly', true);
-            $("#id_factura_cuenta").val(0);
-            $("#nro_cuota").val(0);
-            $("#total").val(0);
-            $("#vuelto").prop('style', 'color: black');
-            $("#importe").val(0);
-        $("#id_forma_pago").val(0);
-        $("#vuelto").val(0);
-            
+function buscarIdCaja() {
+    var datosFormulario = $("#formPrograma").serialize();
+    //alert(datosFormulario);
+    //var id_usuario = $("#id_usuario").val();
+    //datosFormulario += "&sid_usuario=" + id_usuario;
+  //  alert(datosFormulario);
+    $.ajax({
+        type: 'POST',
+        url: 'jsp/buscarId.jsp',
+        data: datosFormulario,
+        dataType: 'json',
+        beforeSend: function (objeto) {
+            $("#mensajes").html("Enviando datos al Servidor ...");
+        },
+        success: function (json) {
+            $("#mensajes").html(json.mensaje);
+            $("#id_caja").val(json.id_caja);
+            $("#fecha_apertura").val(json.fecha_apertura);
+           // $("#monto_inicial").val(json.monto_inicial);
+            $("#estado_caja").val(json.estado_caja);
+            $("#monto_inicial").val(json.monto_inicial);
+            $("#contenidoDetalle").html(json.contenido_detalle);
+            if (json.nuevo === "true") {
+                $("#botonAgregar").prop('disabled', false);
+                $("#botonModificar").prop('disabled', true);
+                $("#botonEliminar").prop('disabled', true);
+                $("#detalle").prop('hidden', true);
+                //siguienteCampo("#nombre_caja", "#botonAgregar", true);
+            } else {
+                $("#botonAgregar").prop('disabled', true);
+                $("#botonModificar").prop('disabled', false);
+                $("#botonEliminar").prop('disabled', true);
+                $("#detalle").prop('hidden', false);
+                //siguienteCampo("#nombre_caja", "#botonModificar", true);
+            }
+        },
+        error: function (e) {
+            $("#mensajes").html("No se pudo recuperar los datos.");
+        },
+        complete: function (objeto, exito, error) {
+            if (exito === "success") {
+            }
         }
-        
-    }
+    });
 }
 
 function agregarCaja() {
@@ -110,51 +121,6 @@ function eliminarCaja() {
     });
 }
 
-function buscarIdCaja() {
-    var datosFormulario = $("#formPrograma").serialize();
-    //alert(datosFormulario);
-    var id_usuario = $("#id_usuario").val();
-    datosFormulario += "&sid_usuario=" + id_usuario;
-  //  alert(datosFormulario);
-    $.ajax({
-        type: 'POST',
-        url: 'jsp/buscarId.jsp',
-        data: datosFormulario,
-        dataType: 'json',
-        beforeSend: function (objeto) {
-            $("#mensajes").html("Enviando datos al Servidor ...");
-        },
-        success: function (json) {
-            $("#mensajes").html(json.mensaje);
-            $("#id_caja").val(json.id_caja);
-            $("#fecha_apertura").val(json.fecha_apertura);
-            $("#monto_inicial").val(json.monto_inicial);
-            $("#estado_caja").val(json.estado_caja);
-            $("#monto_inicial").val(json.monto_inicial);
-            $("#contenidoDetalle").html(json.contenido_detalle);
-            if (json.nuevo === "true") {
-                $("#botonAgregar").prop('disabled', false);
-                $("#botonModificar").prop('disabled', true);
-                $("#botonEliminar").prop('disabled', true);
-                $("#detalle").prop('hidden', true);
-                //siguienteCampo("#nombre_caja", "#botonAgregar", true);
-            } else {
-                $("#botonAgregar").prop('disabled', true);
-                $("#botonModificar").prop('disabled', false);
-                $("#botonEliminar").prop('disabled', true);
-                $("#detalle").prop('hidden', false);
-                //siguienteCampo("#nombre_caja", "#botonModificar", true);
-            }
-        },
-        error: function (e) {
-            $("#mensajes").html("No se pudo recuperar los datos.");
-        },
-        complete: function (objeto, exito, error) {
-            if (exito === "success") {
-            }
-        }
-    });
-}
 
 function buscarNombreCaja() {
     var datosFormulario = $("#formBuscar").serialize();
@@ -615,68 +581,6 @@ function limpiarFormulario() {
 
 }
 
-function buscarIdForma_pago() {
-    var datosFormulario = $("#formPrograma").serialize();
-    $.ajax({
-        type: 'POST',
-        url: 'jsp/buscarIdPago.jsp',
-        data: datosFormulario,
-        dataType: 'json',
-        beforeSend: function (objeto) {
-            $("#mensajes").html("Enviando datos al Servidor ...");
-        },
-        success: function (json) {
-            $("#mensajes").html(json.mensaje);
-            $("#id_forma_pago").val(json.id_forma_pago);
-            $("#nombre_forma_pago").val(json.nombre_forma_pago);
-
-        },
-        error: function (e) {
-            $("#mensajes").html("No se pudo recuperar los datos.");
-        },
-        complete: function (objeto, exito, error) {
-            if (exito === "success") {
-            }
-        }
-    });
-}
-
-function buscarNombreForma_pago() {
-    var datosFormulario = $("#formBuscar").serialize();
-    $.ajax({
-        type: 'POST',
-        url: 'jsp/buscarNombrePago.jsp',
-        data: datosFormulario,
-        dataType: 'json',
-        beforeSend: function (objeto) {
-            $("#mensajes").html("Enviando datos al Servidor ...");
-            $("#contenidoBusqueda").css("display", "none");
-        },
-        success: function (json) {
-            $("#mensajes").html(json.mensaje);
-            $("#contenidoBusqueda").html(json.contenido);
-            $("#contenidoBusqueda").fadeIn("slow");
-            $("tbody tr").on("click", function () {
-                var id = $(this).find("td:first").html();
-                $("#panelBuscar").html("");
-                $("#id_forma_pago").val(id);
-                $("#nombre_forma_pago").focus();
-                buscarIdForma_pago();
-                $("#buscar").fadeOut("slow");
-                $("#panelPrograma").fadeIn("slow");
-            });
-        },
-        error: function (e) {
-            $("#mensajes").html("No se pudo recuperar los datos.");
-        },
-        complete: function (objeto, exito, error) {
-            if (exito === "success") {
-
-            }
-        }
-    });
-}
-
 function agregarLinea() {
     $("#id_detallecaja").val("0");
     $("#id_factura_cuenta").val("0");
@@ -894,3 +798,177 @@ function SoloNumeros(evt) {
         return false;
     }
 }
+
+
+
+/*BUSCAR CUOTAS POR NOMBRE*/
+function buscarCuota() {
+    var datosFormulario = $("#formBuscar").serialize();  
+    $.ajax({
+       type: 'POST',
+       url: 'jsp/buscarCuota.jsp',
+       data: datosFormulario,
+       dataType: 'json',
+       beforeSend: function (objeto) {
+           $("#mensajes").html("Enviando datos al Servidor ...");
+           $("#contenidoBusqueda").css("display", "none");
+       },
+       success: function (json){
+           $("#mensajes").html(json.mensaje);
+           $("#contenidoBusqueda").html(json.contenido);
+           $("#contenidoBusqueda").fadeIn("fast");
+           $("tbody tr").on("click", function(){
+              var id = $(this).find("td:first").html();
+              $("#panelBuscar").html("");
+              $("#id_inscripcion").val(id);
+              $("#nombre_alumno").focus();
+              buscarIdInscripcion();
+              $("#buscar").fadeOut("fast");
+              $("#panelPrograma").fadeIn("fast");
+          });
+       },
+       error: function(e) {
+           $("#mensajes").html("No se pudo modificar los datos.");
+       },
+       complete: function(objeto, exito, error) {
+           if (exito === "success"){
+               
+           }
+       }
+    });
+}
+/*BUSCAR CUOTAS POR NUMERO DE CI*/
+function buscarCuotaCi() {
+    var datosFormulario = $("#formBuscar").serialize();  
+    $.ajax({
+       type: 'POST',
+       url: 'jsp/buscarCuotaCi.jsp',
+       data: datosFormulario,
+       dataType: 'json',
+       beforeSend: function (objeto) {
+           $("#mensajes").html("Enviando datos al Servidor ...");
+           $("#contenidoBusqueda").css("display", "none");
+       },
+       success: function (json){
+           $("#mensajes").html(json.mensaje);          
+           $("#contenidoBusqueda").html(json.contenido);
+           $("#contenidoBusqueda").fadeIn("fast");
+           $("tbody tr").on("click", function(){
+              var id = $(this).find("td:first").html();
+              $("#panelBuscar").html("");
+              $("#id_inscripcion").val(id);
+              $("#nombre_alumno").focus();
+              buscarIdInscripcion();
+              $("#buscar").fadeOut("fast");
+              $("#panelPrograma").fadeIn("fast");
+          });
+       },
+       error: function(e) {
+         
+           $("#mensajes").html("No se pudo modificar los datos(ci)");
+       },
+       complete: function(objeto, exito, error) {
+           if (exito === "success"){
+               
+           }
+       }
+    });
+}
+
+function validarBuscarCuota() { 
+    var valor=true;
+    if ($("#fecha_buscar").val().trim()===""){
+        valor=false;
+        $("#mensajes").html("Por favor complete la fecha");
+        $("#fecha_buscar").focus();
+        alert("Fecha vacia!");
+    } 
+    
+    return valor;
+}
+
+function buscarIdInscripcion() {
+    var datosFormulario = $("#formPrograma").serialize();
+    $.ajax({
+        type: 'POST',
+        url: 'jsp/buscarIdInscripcion.jsp',
+        data: datosFormulario,
+        dataType: 'json',
+        beforeSend: function (objeto) {
+            $("#mensajes").html("Enviando datos al Servidor ...");
+        },
+        success: function (json) {
+            $("#mensajes").html(json.mensaje);
+            $("#id_inscripcion").val(json.id_inscripcion);
+           /*
+            $("#fecha_inscripcion").val(json.fecha_inscripcion);
+            $("#vencimientocuota_inscripcion").val(json.vencimientocuota_inscripcion);            
+            $("#id_alumno").val(json.id_alumno);
+            $("#nombre_alumno").val(json.nombre_alumno);
+            $("#apellido_alumno").val(json.apellido_alumno);
+            $("#nroci_alumno").val(json.nroci_alumno);            
+            $("#id_convocatoria").val(json.id_convocatoria);            
+            $("#nombre_convocatoria").val(json.nombre_convocatoria);  
+            */
+           
+          /*  $("#id_curso").val(json.id_curso);
+            $("#nombre_curso").val(json.nombre_curso);            
+            $("#id_turno").val(json.id_turno);
+            $("#nombre_turno").val(json.nombre_turno);
+            */
+           
+          //  $("#codigo_convocatoria").val(json.codigo_convocatoria);
+          // $("#nro_cuotas").val(json.nro_cuotas);            
+           
+        },
+        error: function (e) {
+            $("#mensajes").html("No se pudo modificar los datos.");
+        },
+        complete: function (objeto, exito, error){
+           if (exito === "success"){
+           }
+        }
+    });
+}
+
+
+
+
+
+
+
+/*function hidden() {
+    var t = $("#id_tfac").val();
+    
+    if (t === "1") {
+
+
+        $("#tf").prop('hidden', false);
+        $("#tf1").prop('hidden', true);
+        $("#id_factura_cuenta").prop('readonly', false);
+        $("#id_cuenta").val(0);
+        $("#id_factura_cuenta").val(0);
+        $("#total").val(0);
+        $("#vuelto").prop('style', 'color: black');
+        $("#importe").val(0);
+        $("#id_forma_pago").val(0);
+        $("#vuelto").val(0);
+
+    }else{
+        if (t === "2"){
+            $("#tf").prop('hidden', true);
+            $("#tf1").prop('hidden', false);
+            $("#id_factura_cuenta").prop('readonly', true);
+            $("#id_factura_cuenta").val(0);
+            $("#nro_cuota").val(0);
+            $("#total").val(0);
+            $("#vuelto").prop('style', 'color: black');
+            $("#importe").val(0);
+        $("#id_forma_pago").val(0);
+        $("#vuelto").val(0);
+            
+        }
+        
+    }
+}
+*/

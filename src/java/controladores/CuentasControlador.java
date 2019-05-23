@@ -96,7 +96,10 @@ public class CuentasControlador {
                                     System.out.println("--> " + ex1.getLocalizedMessage());
                                 }
                             }
-                            cuota_vencimiento.add(Calendar.DATE, 30);
+                            //agregar 30 dias a la fecha de vencimiento                           
+                            //cuota_vencimiento.add(Calendar.DATE, 30);
+                            //sumar un mes a la fecha de vencmiento
+                            cuota_vencimiento.add(Calendar.MONTH, 1);
                         }
                     }
                     ps.close();
