@@ -109,19 +109,9 @@ function buscarIdInscripcion() {
             $("#nombre_turno").val(json.nombre_turno);
             */
             $("#codigo_convocatoria").val(json.codigo_convocatoria);
-            $("#nro_cuotas").val(json.nro_cuotas);            
-           
-            if (json.nuevo === "true") {
-               $("#botonAgregar").prop('disabled', false);
-               $("#botonModificar").prop('disabled', true);
-               $("#botonEliminar").prop('disabled', true);
-          siguienteCampo("#fecha_inscripcion", "#botonAgregar", true);
-           } else {
-               $("#botonAgregar").prop('disabled', true);
-               $("#botonModificar").prop('disabled', false);
-               $("#botonEliminar").prop('disabled', true);
-               siguienteCampo("#fecha_inscripcion", "#botonModificar", true);
-           }
+            $("#nro_cuotas").val(json.nro_cuotas); 
+                     
+          
         },
         error: function (e) {
             $("#mensajes").html("No se pudo modificar los datos.");

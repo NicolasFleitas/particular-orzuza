@@ -112,5 +112,29 @@ public class CuentasControlador {
         Conexion.cerrar();
         return valor;
     }
+     public static boolean modificarestadocobro(Cuentas cuenta){
+        boolean valor = false;
+        if (Conexion.conectar()){ 
+           /*String sql = "update cobros set nombre_cobro='" + cobro.getNombre_cobro() + "'"
+                    + " where id_cobro=" + cobro.getId_cobro();
+                    */
+           
+           String sql = "UPDATE cuentas_cte SET estado = 'COBRADO'"
+                   + " WHERE "
+                   + "id_inscripcion = " + cuenta.getInscripcion().getId_inscripcion()
+                   + " AND "
+                   + "cuota_cuota = " + cuenta.getCuota_cuota() ;
+            try {
+                Conexion.getSt().executeUpdate(sql);
+                valor = true;
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(CuentasControlador.class.getName()).log(Level.SEVERE, null, ex);
+            }        
+        }
+        
+        return valor;
+        
+    }
 
 }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 import modelos.Alumnos;
 import modelos.Convocatorias;
+import modelos.Cuentas;
 import modelos.Materias;
 
 
@@ -315,6 +316,129 @@ public class InscripcionesControlador {
         return valor;
     }
 
+    public static Inscripciones buscarIdCte(Inscripciones inscripcion) {
+        if (Conexion.conectar()){
+            String sql = "select * from inscripciones i,"
+                    + "alumnos a,"
+                    + "convocatorias cv,"
+                    + "cuentas_cte cta"
+                    + " where "
+                    + "i.id_alumno=a.id_alumno"
+                    + " AND "
+                    + "i.id_convocatoria=cv.id_convocatoria"
+                    + " AND "   
+                     + "i.id_inscripcion=cta.id_inscripcion"
+                    + " AND " 
+                    + " i.id_inscripcion ='"+inscripcion.getId_inscripcion()+"'";
+            
+            try {
+                ResultSet rs = Conexion.getSt().executeQuery(sql);
+                if (rs.next()){
+                    inscripcion.setId_inscripcion(rs.getInt("id_inscripcion"));
+                    inscripcion.setFecha_inscripcion(rs.getDate("fecha_inscripcion"));
+                    inscripcion.setVencimientocuota_inscripcion(rs.getDate("vencimientocuota_inscripcion"));
+                    
+                    Alumnos alumno = new Alumnos();
+                    alumno.setId_alumno(rs.getInt("id_alumno"));
+                    alumno.setNombre_alumno(rs.getString("nombre_alumno"));
+                    alumno.setApellido_alumno(rs.getString("apellido_alumno"));
+                    alumno.setNroci_alumno(rs.getInt("nroci_alumno"));
+                 
+                    Convocatorias convocatoria = new Convocatorias();
+                    convocatoria.setId_convocatoria(rs.getInt("id_convocatoria"));                    
+                    convocatoria.setCodigo_convocatoria(rs.getString("codigo_convocatoria"));
+                    convocatoria.setNombre_convocatoria(rs.getString("nombre_convocatoria"));
+                    convocatoria.setMonto_convocatoria(rs.getInt("monto_convocatoria"));
+                    inscripcion.setAlumno(alumno);
+                    inscripcion.setConvocatoria(convocatoria);  
+                    
+                    inscripcion.setNro_cuotas(rs.getInt("nro_cuotas"));
+                    inscripcion.setFecha_inscripcion(rs.getDate("fecha_inscripcion"));
+                    
+                    
+                } else {    
+                   inscripcion.setId_inscripcion(0);
+                   //Obtengo la fecha actual para luego asignarla si no se encuentra creada la inscripcion
+                   java.sql.Date fecha_inscripcion = new java.sql.Date(new java.util.Date().getTime());
+                   inscripcion.setFecha_inscripcion(fecha_inscripcion);
+                   //**//
+                   inscripcion.setVencimientocuota_inscripcion(null);                    
+                   
+                    Alumnos alumno = new Alumnos();
+                    alumno.setId_alumno(0);
+                    alumno.setNombre_alumno("");
+                    alumno.setApellido_alumno("");
+                    alumno.setNroci_alumno(0);                   
+                                        
+                    Convocatorias  convocatoria= new Convocatorias();
+                    convocatoria.setId_convocatoria(0);        
+                    
+                    
+                    inscripcion.setAlumno(alumno);
+                    inscripcion.setConvocatoria(convocatoria);   
+                    inscripcion.setNro_cuotas(0);
+                    
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error: " + ex);
+            }
+        }
+        return inscripcion;
+    }
+    
+    public static String buscarNombreCte(String nombre, int pagina) {
+      
+        int offset = (pagina - 1) * Utiles.REGISTROS_PAGINA;
+        String valor = "";
+        if (Conexion.conectar()) {
+            
+            try {
+                  //System.out.println(nombre);
+                String sql = "SELECT * FROM inscripciones i,alumnos a, convocatorias cv, cuentas_cte cta"
+                        + " WHERE "
+                        + "i.id_alumno = a.id_alumno"
+                        + " AND " 
+                        + "i.id_convocatoria = cv.id_convocatoria"                      
+                        + " AND "
+                        + "i.id_inscripcion = cta.id_inscripcion"                      
+                        + " AND "
+                        + "(a.nombre_alumno) like '%" +
+                        nombre.toUpperCase() + "%'"
+                        + " ORDER BY i.id_inscripcion, cta.id_inscripcion, cta.cuota_cuota offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;
+              
+               // System.out.println("--->" + sql);
+                try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
+                    ResultSet rs = ps.executeQuery();
+                    String tabla = "";
+                    while (rs.next()) {
+                        tabla += "<tr>"
+                                + "<td>" + rs.getString("id_inscripcion") + "</td>"
+                                + "<td>" + rs.getString("nombre_alumno") + "</td>"
+                                + "<td>" + rs.getString("nombre_convocatoria") + "</td>"
+                                
+                                + "<td>" + rs.getString("cuota_cuota") + "</td>"
+                                + "<td>" + rs.getString("total_cuota") + "</td>"
+                                + "<td>" + rs.getString("estado") + "</td>"
+                                
+                                + "</tr>";
+                    }   
+                    if (tabla.equals("")) {
+                        tabla = "<tr><td colspan=2> No existen registros...</td></tr>";
+                    }
+                    ps.close();
+                    valor = tabla;
+                } catch (SQLException ex) {
+                    System.err.println("Error: " + ex);
+                }
+                Conexion.cerrar();
+            } catch (Exception ex) {
+                System.err.println("Error: " + ex);
+            }
+        }
+        Conexion.cerrar();
+        return valor;
+    }
+  
     
     
      

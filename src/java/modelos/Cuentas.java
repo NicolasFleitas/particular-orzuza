@@ -10,20 +10,32 @@ public class Cuentas {
    private Date vencimiento_cuota;
    private int monto_cuota;
    private int total_cuota;
+   private String estado;
    private Conceptos concepto;
 
     public Cuentas() {
     }
 
-    public Cuentas(int id_cuenta, Inscripciones inscripcion, int cuota_cuota, Date vencimiento_cuota, int monto_cuota, int total_cuota, Conceptos concepto) {
+    public Cuentas(int id_cuenta, Inscripciones inscripcion, int cuota_cuota, Date vencimiento_cuota, int monto_cuota, int total_cuota, String estado, Conceptos concepto) {
         this.id_cuenta = id_cuenta;
         this.inscripcion = inscripcion;
         this.cuota_cuota = cuota_cuota;
         this.vencimiento_cuota = vencimiento_cuota;
         this.monto_cuota = monto_cuota;
         this.total_cuota = total_cuota;
+        this.estado = estado;
         this.concepto = concepto;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    
 
     public int getId_cuenta() {
         return id_cuenta;
