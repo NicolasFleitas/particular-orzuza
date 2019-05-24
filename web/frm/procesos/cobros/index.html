@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Particular Orzuza | Turnos</title>
+    <title>Particular Orzuza | Cobros</title>
     <link rel="icon" type="image/png" href="../../../favicon.png" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
     <div id="confirmar"></div>
     <div id="buscar"></div>
     <div id="panelPrograma" class="panel panel-primary">
-        <div class="panel-heading centrado">Turnos | <span id="susuario_usuario"></span></div>
+        <div class="panel-heading centrado">Cobros | <span id="susuario_usuario"></span></div>
         <div class="panel-body">
             <form id="formPrograma">
                 <div class="row">
@@ -24,7 +24,7 @@
                         <input id="id_cobro" name="id_cobro" type="text" class="form-control input-sm" placeholder="Id">
                     </div>
                     <div class="col-md-1">
-                        <button id="botonBuscarIdTurno" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                        <button id="botonBuscarIdCobro" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
                     </div>
                     <div class="col-md-9">
                     </div>
@@ -79,25 +79,25 @@
             if ($("#id_cobro").val() === "") {
                 $("#id_cobro").val("0");
             }
-            buscarIdTurno();
+            buscarIdCobro();
         });
-        $("#botonBuscarIdTurno").on('click', function () {
+        $("#botonBuscarIdCobro").on('click', function () {
             $("#buscar").load("buscar.html");
             $("#buscar").fadeIn("slow");
             $("#panelPrograma").fadeOut("slow");
         });
         $("#botonAgregar").on('click', function () {
             if (validarFormulario()) {
-            agregarTurno();
+            agregarCobro();
             }  
         });
         $("#botonModificar").on('click', function () {
             if(validarFormulario()) {
-            modificarTurno();
+            modificarCobro();
             }   
         });
         $("#botonEliminarAlert").on('click', function () {
-            eliminarTurno();
+            eliminarCobro();
             $('#confirmarEliminar').modal('hide');
         });
         $("#botonSalir").on('click', function () {

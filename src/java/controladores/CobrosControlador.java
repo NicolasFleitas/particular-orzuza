@@ -1,7 +1,7 @@
 
 package controladores;
 
-import modelos.Turnos;
+import modelos.Cobros;
 import utiles.Conexion;
 import utiles.Utiles;
 import java.util.logging.Level;
@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 
-public class TurnosControlador {
+public class CobrosControlador {
     
     
-     public static boolean agregar(Turnos turno){
+     public static boolean agregar(Cobros cobro){
         boolean valor = false;
         if (Conexion.conectar()){
-            String sql = "insert into turnos (nombre_turno)" 
-                    + "values ('" + turno.getNombre_turno() + "')";
+            String sql = "insert into cobros (nombre_cobro)" 
+                    + "values ('" + cobro.getNombre_cobro() + "')";
                     
             try {
                 Conexion.getSt().executeUpdate(sql);
@@ -27,7 +27,7 @@ public class TurnosControlador {
                 valor = true;
                 
             } catch (SQLException ex) {
-                Logger.getLogger(TurnosControlador.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CobrosControlador.class.getName()).log(Level.SEVERE, null, ex);
             }        
         }
         
@@ -35,18 +35,18 @@ public class TurnosControlador {
         
     }
      
-     public static boolean modificar(Turnos turno){
+     public static boolean modificar(Cobros cobro){
         boolean valor = false;
         if (Conexion.conectar()){ 
-            String sql = "update turnos set nombre_turno='" + turno.getNombre_turno() + "'"
-                    + " where id_turno=" + turno.getId_turno();
+            String sql = "update cobros set nombre_cobro='" + cobro.getNombre_cobro() + "'"
+                    + " where id_cobro=" + cobro.getId_cobro();
                     
             try {
                 Conexion.getSt().executeUpdate(sql);
                 valor = true;
                 
             } catch (SQLException ex) {
-                Logger.getLogger(TurnosControlador.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CobrosControlador.class.getName()).log(Level.SEVERE, null, ex);
             }        
         }
         
@@ -54,10 +54,10 @@ public class TurnosControlador {
         
     }
     
-    public static boolean eliminar(Turnos turno){
+    public static boolean eliminar(Cobros cobro){
         boolean valor = false;
         if (Conexion.conectar()){
-            String sql = "delete from turnos where id_turno=" + turno.getId_turno();
+            String sql = "delete from cobros where id_cobro=" + cobro.getId_cobro();
                     
             try {
                 Conexion.getSt().executeUpdate(sql);
@@ -65,31 +65,31 @@ public class TurnosControlador {
                 valor = true;
                 
             } catch (SQLException ex) {
-                Logger.getLogger(TurnosControlador.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CobrosControlador.class.getName()).log(Level.SEVERE, null, ex);
             }        
         }
         
         return valor;
         
     }
-    public static Turnos buscarId(Turnos turno) {
+    public static Cobros buscarId(Cobros cobro) {
         if (Conexion.conectar()){
-            String sql = "select * from turnos where id_turno ='"+turno.getId_turno()+"'";
+            String sql = "select * from cobros where id_cobro ='"+cobro.getId_cobro()+"'";
             
             try {
                 ResultSet rs = Conexion.getSt().executeQuery(sql);
                 if (rs.next()){
-                    turno.setId_turno(rs.getInt("id_turno"));
-                    turno.setNombre_turno(rs.getString("nombre_turno"));
+                    cobro.setId_cobro(rs.getInt("id_cobro"));
+                    cobro.setNombre_cobro(rs.getString("nombre_cobro"));
                 } else {
-                    turno.setId_turno(0);
-                    turno.setNombre_turno("");
+                    cobro.setId_cobro(0);
+                    cobro.setNombre_cobro("");
                 }
             } catch (SQLException ex) {
                 System.out.println("Error: " + ex);
             }
         }
-        return turno;
+        return cobro;
     }
     
     public static String buscarNombre(String nombre, int pagina) {
@@ -100,9 +100,9 @@ public class TurnosControlador {
             
             try {
                   System.out.println(nombre);
-                String sql = "select * from turnos where upper(nombre_turno) like '%" +
+                String sql = "select * from cobros where upper(nombre_cobro) like '%" +
                         nombre.toUpperCase() + "%'"
-                        + "order by id_turno offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;
+                        + "order by id_cobro offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;
               
                 System.out.println("--->" + sql);
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
@@ -110,8 +110,8 @@ public class TurnosControlador {
                     String tabla = "";
                     while (rs.next()) {
                         tabla += "<tr>"
-                                + "<td>" + rs.getString("id_turno") + "</td>"
-                                + "<td>" + rs.getString("nombre_turno") + "</td>"
+                                + "<td>" + rs.getString("id_cobro") + "</td>"
+                                + "<td>" + rs.getString("nombre_cobro") + "</td>"
                                 + "</tr>";
                     }   
                     if (tabla.equals("")) {

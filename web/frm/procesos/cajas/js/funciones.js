@@ -205,13 +205,11 @@ function buscarCaja() {
         },
         success: function (json) {
             $("#mensajes").html(json.mensaje);
-
-
             if (json.nuevo === "false") {
                 $("#nombre_caja").val("");
                 $("#nombre_caja").focus();
             } else {
-
+                
             }
         },
         error: function (e) {
@@ -237,7 +235,9 @@ function buscarIdCajaDetalle() {
         },
         success: function (json) {
             $("#mensajes").html(json.mensaje);
-            $("#id_detallecaja").val(json.id_detallecaja);
+             $("#id_detallecaja").val(json.id_detallecaja);
+             $("#id_caja").val(json.id_caja);
+              
 //            $("#id_factura_caja").val(json.id_articulo);
 //            $("#precio_cuenta").val(json.precio_cuenta);
 //            $("#precio_compra").val(json.precio_compra);
@@ -246,13 +246,12 @@ function buscarIdCajaDetalle() {
 
           //  $("#id_factura_cuenta").val(json.id_factura_cuenta);
             //$("#numero_factura_cuenta").val(json.numero_factura_cuenta);
-            $("#id_forma_pago").val(json.id_forma_pago);
-            //$("#nombre_forma_pago").val(json.nombre_forma_pago);
-
-
-
+           // $("#id_forma_pago").val(json.id_forma_pago);
+            //$("#nombre_forma_pago").val(json.nombre_forma_pago);///
             //$("#total").val(json.total);
+            
             $("#importe").val(json.importe);
+            
             //$("#vuelto").val(json.vuelto);
             //$("#subtotal_cuenta").val(json.subtotal_cuenta);
         },
@@ -368,7 +367,7 @@ function buscarIdCuenta() {
         success: function (json) {
             $("#mensajes").html(json.mensaje);
             $("#id_cuenta").val(json.cuenta);
-            $("#total").val(json.total);
+           // $("#total").val(json.total);
             $("#id_cuenta").val(0);
             //$("#vuelto").val(json.vuelto);
             //$("#id_cliente").val(json.id_cliente);
@@ -402,7 +401,7 @@ function buscarIdCuenta() {
         }
     });
 }
-
+/*
 function buscarIdCuenta() {
     var datosFormulario = $("#formLinea").serialize();
     //alert(datosFormulario);
@@ -417,9 +416,9 @@ function buscarIdCuenta() {
         success: function (json) {
             $("#mensajes").html(json.mensaje);
             $("#id_cuenta").val(json.id_cuenta);
-            $("#nro_cuota").val(json.nro_cuota);
-            $("#id_factura_cuenta").val(json.id_factura_cuenta);
-            $("#total").val(json.total);
+            //$("#nro_cuota").val(json.nro_cuota);
+           // $("#id_factura_cuenta").val(json.id_factura_cuenta);
+          //  $("#total").val(json.total);
             //$("#vuelto").val(json.vuelto);
             //$("#id_cliente").val(json.id_cliente);
             //$("#nombre_cliente").val(json.nombre_cliente);
@@ -440,11 +439,12 @@ function buscarIdCuenta() {
              } else {
              
              $("#cuota").prop('hidden', false);
-             }*/
+             }
 
         },
+
         error: function (e) {
-            $("#mensajes").html("No se pudo recuperar los datos.");
+            $("#mensajes").html("No se pudo recuperar los datos id-cuenta.");
         },
         complete: function (objeto, exito, error) {
             if (exito === "success") {
@@ -452,42 +452,7 @@ function buscarIdCuenta() {
         }
     });
 }
-
-function buscarNombreFacturaCuenta() {
-    var datosFormulario = $("#formBuscar").serialize();
-    $.ajax({
-        type: 'POST',
-        url: 'jsp/buscarNombreCuenta.jsp',
-        data: datosFormulario,
-        dataType: 'json',
-        beforeSend: function (objeto) {
-            $("#mensajes").html("Enviando datos al Servidor ...");
-            $("#contenidoBusqueda").css("display", "none");
-        },
-        success: function (json) {
-            $("#mensajes").html(json.mensaje);
-            $("#contenidoBusqueda").html(json.contenido);
-            $("#contenidoBusqueda").fadeIn("slow");
-            $("tbody tr").on("click", function () {
-                var id = $(this).find("td:first").html();
-                $("#panelBuscar").html("");
-                $("#id_factura_cuenta").val(id);
-                $("#nombre_cliente").focus();
-                buscarIdCuenta();
-                $("#buscar").fadeOut("slow");
-                $("#panelLinea").fadeIn("slow");
-            });
-        },
-        error: function (e) {
-            $("#mensajes").html("No se pudo buscar registros.");
-        },
-        complete: function (objeto, exito, error) {
-            if (exito === "success") {
-            }
-        }
-    });
-}
-
+*/
 function buscarNombreCuenta() {
     var datosFormulario = $("#formBuscar").serialize();
     $.ajax({
@@ -529,7 +494,7 @@ function buscarNombreCuenta() {
 
 function validarFormulario() {
     var valor = true;
-    if ($("#fecha_apertura").val().trim() === "" ) {
+    /*if ($("#fecha_apertura").val().trim() === "" ) {
         valor = false;
         $("#mensajes").html("Seleccionar fecha.");
         $("#fecha_apertura").focus();
@@ -539,7 +504,7 @@ function validarFormulario() {
         $("#mensajes").html("Monto no puede estar vacio.");
         $("#monto_inicial").focus();
     }
-    
+    */
     
 
     return valor;
@@ -583,15 +548,15 @@ function limpiarFormulario() {
 
 function agregarLinea() {
     $("#id_detallecaja").val("0");
-    $("#id_factura_cuenta").val("0");
+    $("#id_cuenta").val("0");
     $("#numero_factura_cuenta").val("");
     // $("#costo_producto").val("0");
     //  $("#iva_producto").val("");
     //  $("#cantidad_productocaja").val("0");
     $("#panelLinea").fadeIn("slow");
     $("#panelPrograma").fadeOut("slow");
-    $("#id_factura_cuenta").focus();
-    $("#id_factura_cuenta").select();
+    $("#id_cuenta").focus();
+    $("#idcuenta").select();
     $("#botonAgregarLinea").prop('disabled', false);
     $("#botonModificarLinea").prop('disabled', true);
     $("#botonEliminarLinea").prop('disabled', true);

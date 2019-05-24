@@ -1,14 +1,14 @@
 function validarFormulario(){
     var valor=true;
-    if ($("#nombre_turno").val().trim()===""){
+    if ($("#nombre_cobro").val().trim()===""){
         valor=false;
-        $("#mensajes").html("Ingrese un nombre de turno por favor");
-        $("#nombre_turno").focus();    } 
+        $("#mensajes").html("Ingrese un nombre de cobro por favor");
+        $("#nombre_cobro").focus();    } 
     return valor;
 }
 
 
-function agregarTurno() {
+function agregarCobro() {
     var datosFormulario = $("#formPrograma").serialize();
     $.ajax({
         type: 'POST',
@@ -21,19 +21,19 @@ function agregarTurno() {
         success: function (json) {
             $("#mensajes").html(json.mensaje);
             limpiarFormulario();
-            $("#id_turno").focus();
-            $("#id_turno").select();
+            $("#id_cobro").focus();
+            $("#id_cobro").select();
         },
         error: function (e) {
             $("#mensajes").html("No se pudo modificar los datos.");
         },
         complete: function (objeto, exito, error){
-            $("#id_turno").focus();
+            $("#id_cobro").focus();
         }
     });
 }
 
-function modificarTurno() {
+function modificarCobro() {
     var datosFormulario = $("#formPrograma").serialize();
     $.ajax({
         type: 'POST',
@@ -46,8 +46,8 @@ function modificarTurno() {
         success: function (json) {
             $("#mensajes").html(json.mensaje);
             limpiarFormulario();
-            $("#id_turno").focus();
-            $("#id_turno").select();
+            $("#id_cobro").focus();
+            $("#id_cobro").select();
         },
         error: function (e) {
             $("#mensajes").html("No se pudo modificar los datos.");
@@ -58,7 +58,7 @@ function modificarTurno() {
     });
 }
 
-function eliminarTurno() {
+function eliminarCobro() {
     var datosFormulario = $("#formPrograma").serialize();
     $.ajax({
         type: 'POST',
@@ -71,8 +71,8 @@ function eliminarTurno() {
         success: function (json) {
             $("#mensajes").html(json.mensaje);
             limpiarFormulario();
-            $("#id_turno").focus();
-            $("#id_turno").select();
+            $("#id_cobro").focus();
+            $("#id_cobro").select();
         },
         error: function (e) {
             $("#mensajes").html("No se pudo modificar los datos.");
@@ -85,7 +85,7 @@ function eliminarTurno() {
     });
 }
 
-function buscarIdTurno() {
+function buscarIdCobro() {
     var datosFormulario = $("#formPrograma").serialize();
     $.ajax({
         type: 'POST',
@@ -97,19 +97,19 @@ function buscarIdTurno() {
         },
         success: function (json) {
             $("#mensajes").html(json.mensaje);
-            $("#id_turno").val(json.id_turno);
-            $("#nombre_turno").val(json.nombre_turno);
+            $("#id_cobro").val(json.id_cobro);
+            $("#nombre_cobro").val(json.nombre_cobro);
            
             if (json.nuevo === "true") {
                $("#botonAgregar").prop('disabled', false);
                $("#botonModificar").prop('disabled', true);
                $("#botonEliminar").prop('disabled', true);
-            siguienteCampo("#nombre_turno", "#botonAgregar", true);
+            siguienteCampo("#nombre_cobro", "#botonAgregar", true);
            } else {
                $("#botonAgregar").prop('disabled', true);
                $("#botonModificar").prop('disabled', false);
                $("#botonEliminar").prop('disabled', true);
-               siguienteCampo("#nombre_turno", "#botonModificar", true);
+               siguienteCampo("#nombre_cobro", "#botonModificar", true);
            }
         },
         error: function (e) {
@@ -122,7 +122,7 @@ function buscarIdTurno() {
     });
 }
 
-function buscarNombreTurno() {
+function buscarNombreCobro() {
     var datosFormulario = $("#formBuscar").serialize();
   
     $.ajax({
@@ -141,9 +141,9 @@ function buscarNombreTurno() {
            $("tbody tr").on("click", function(){
               var id = $(this).find("td:first").html();
               $("#panelBuscar").html("");
-              $("#id_turno").val(id);
-              $("#nombre_turno").focus();
-              buscarIdTurno();
+              $("#id_cobro").val(id);
+              $("#nombre_cobro").focus();
+              buscarIdCobro();
               $("#buscar").fadeOut("slow");
               $("#panelPrograma").fadeIn("slow");
           });
@@ -160,7 +160,7 @@ function buscarNombreTurno() {
 }
 
 function limpiarFormulario() {
-        $("#id_turno").val("");
-        $("#nombre_turno").val("");
+        $("#id_cobro").val("");
+        $("#nombre_cobro").val("");
         
 }

@@ -26,23 +26,36 @@
                         </div>
                     </div>
                     <br>
-                    <div class="row">
-                        
-                         <div class="col-xs-1 col-sm-1 col-md-1">
-                            <span>Nº</span>
+                    
+                         <div class="row">
+                        <div class="col-xs-1 col-sm-1 col-md-1">
+                            <span>NºIns</span>
                         </div>
-                        
                         <div class="col-xs-2 col-sm-3 col-md-1">
                             <input id="id_inscripcion" name="id_inscripcion" type="text" class="form-control input-sm"
                                    placeholder="nº" onkeypress="return SoloNumeros(event)">
+                        </div>
+                        
+                        <div class="col-xs-8 col-sm-1 col-md-1">
+                            <button id="botonBuscarIdInscripcion" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
+                            
+                        </div>
+                        <div class="col-sm-7 col-md-9">
+
+                        </div>
+                    </div>
+                    
+                    <div class="row">                        
+                         <div class="col-xs-1 col-sm-1 col-md-1">
+                            <span>Nº</span>
                         </div>
                         
                          <div class="col-md-2 col-xs-4 col-sm-3">
                             <button id="botonCuota" type="button" class="btn btn-primary btn-sm"><span class="">Consultar cuotas</span></button>
                         </div>                        
                     </div>
-                    <br>                  
                     
+                    <br>  
                   
                     <div class="row">
                         <div class="col-md-1">
@@ -62,7 +75,7 @@
                         </div>
                     </div>
 
-                </form>
+                </form> <!-- FORMULARIO DETALLE -->
             </div>
             
             <div class="panel-footer centrado">
@@ -109,7 +122,7 @@
                         </div>
                         <div class="col-xs-3 col-md-1">
                             <input id="id_caja" name="id_caja" type="text"
-                                   class="form-control imput-sm" placeholder="Id" onkeypress="return SoloNumeros(event)">
+                                   class="form-control input-sm" placeholder="Id" onkeypress="return SoloNumeros(event)">
                         </div>
                         <!--div class="col-md-1">
                             <button id="botonBuscarIdCaja" type="button" class="btn btn-primary btn-sm"><span
@@ -153,12 +166,11 @@
 
                 </form>
 <!--**** -->
-<!--Tabla Detalle -->
+<!--TABLA DETALLE -->
                 <div id="detalle" >
                     <table class="table table-bordered table-striped table-hover">
                         <thead>
                             <tr>
-
                                 <th>NºPago</th>
                                 <th>Cuenta</th>
                                 <!--<th>Id pago</th>-->
@@ -276,7 +288,7 @@
         }
     });
 
-    $("#id_factura_cuenta").focusout(function (event) {
+    $("#id_cuenta").focusout(function (event) {
         if ($("#id_factura_cuenta").val() === "") {
             $("#id_factura_cuenta").val("0");
         }

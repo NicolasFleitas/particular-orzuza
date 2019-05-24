@@ -12,33 +12,36 @@ import modelos.Cuentas;
 import utiles.Conexion;
 import utiles.Utiles;
 
-//import javawebts.modelos.Ventas;
-//import javawebts.modelos.DetallesCajas;
-//import javawebts.modelos.Cajas;
-//import javawebts.utiles.Conexion;
-//import javawebts.utiles.Utiles;
-
 public class DetallesCajasControlador {
 
     public static DetallesCajas buscarId(int id) throws SQLException {
         DetallesCajas detallecaja = null;
         if (Conexion.conectar()) {
             try {
+                /*
                 String sql = "select * from detallescajas dc "
                         + "LEFT JOIN cajas c ON c.id_caja=dc.id_caja "
                         + "LEFT JOIN cuentas_cte cta ON cta.id_cuenta=dc.id_cuenta "                        
                         + "WHERE dc.id_detallecaja=?";
+                */
+                
+                 String sql = "SELECT * FROM detallescajas dc, cajas c, cuentas_cte cta"
+                        + " WHERE "
+                        + "c.id_caja=dc.id_caja"
+                        + " AND "
+                        + "cta.id_cuenta=dc.id_cuenta"
+                         + " AND "                        
+                        + "dc.id_detallecaja=?";
                 
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                     ps.setInt(1, id);
                     ResultSet rs = ps.executeQuery();
                     System.out.println("detallecaja--> " + sql+id);
-                    if (rs.next()) {
-                        
+                    if (rs.next()) {                        
                         detallecaja = new DetallesCajas();
                         detallecaja.setId_detallecaja(rs.getInt("id_detallecaja"));
                         detallecaja.setImporte(rs.getInt("importe"));
-                        //detallecaja.setVuelto(rs.getInt("vuelto"));
+                      //detallecaja.setVuelto(rs.getInt("vuelto"));
 
                         Cuentas cuenta = new Cuentas();
                         cuenta.setCuota_cuota(rs.getInt("id_cuenta"));
@@ -66,14 +69,26 @@ public class DetallesCajasControlador {
         String valor = "";
         if (Conexion.conectar()) {
             try {
+                /*
                 String sql = "SELECT * FROM detallescajas dc "
                         + "LEFT JOIN cajas c on c.id_caja=dc.id_caja "
                         + "LEFT JOIN cuentas_cte cta on cta.id_cuenta=dc.id_cuenta "
                        // + "left join formas_pagos a on a.id_forma_pago=dp.id_forma_pago "
                         + "WHERE dc.id_caja=" + id + " "
                         + "ORDER BY id_detallecaja";
+                */
                 
-                System.out.println("detallescaja--> " + sql);
+                  String sql = "SELECT * FROM detallescajas dc, cajas c, cuentas_cte cta"
+                        + " WHERE "
+                        + "c.id_caja = dc.id_caja"
+                        + " AND "
+                        + "cta.id_cuenta = dc.id_cuenta"
+                        + " AND "
+                        + "dc.id_caja = " + id
+                        + " ORDER BY id_detallecaja";
+                
+                System.out.println("DETALLES_CAJA.buscarIdCaja--> " + sql);
+                
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                     ResultSet rs = ps.executeQuery();
                     DecimalFormat df = new DecimalFormat("#,###");
@@ -85,17 +100,17 @@ public class DetallesCajasControlador {
                         // System.out.println("total"+total);
                         tabla += "<tr>"
                               //  + "<td>" + rs.getString("id_detallecaja") + "</td>"
-                                + "<td>" + rs.getString("id_factura_venta") + "</td>"
-                                + "<td>" + rs.getString("numero_factura_venta") + "</td>"
-                                //+ "<td>" + rs.getString("id_forma_pago") + "</td>"
-                                + "<td>" + rs.getString("nombre_forma_pago") + "</td>"
-                               // + "<td>" + rs.getString("total") + "</td>"
-                                + "<td class='centrado'>" + df.format(cantidad) + "</td>"
-                                /*+ "<td class='centrado'>"
-                                + "<button onclick='editarLinea(" + rs.getString("id_detallecaja") + ")'"
-                                + " type='button' class='btn btn-primary btn-sm'><span class='glyphicon glyphicon-pencil'>"
-                                + "</span></button></td>"*/
-                                + "</tr>";
+                                + "<td>" + rs.getString("id_cuenta") + "</td>"
+                              //  + "<td>" + rs.getString("numero_factura_venta") + "</td>"
+                              //  + "<td>" + rs.getString("id_forma_pago") + "</td>"
+                              //  + "<td>" + rs.getString("nombre_forma_pago") + "</td>"
+                              //  + "<td>" + rs.getString("total") + "</td>"
+                                  + "<td class='centrado'>" + df.format(cantidad) + "</td>"
+                              /*  + "<td class='centrado'>"
+                                  + "<button onclick='editarLinea(" + rs.getString("id_detallecaja") + ")'"
+                                  + " type='button' class='btn btn-primary btn-sm'><span class='glyphicon glyphicon-pencil'>"
+                                  + "</span></button></td>"*/
+                                  + "</tr>";
                     }
                     if (tabla.equals("")) {
                         tabla = "<tr><td  colspan=6>No existen registros ...</td></tr>";
@@ -111,59 +126,23 @@ public class DetallesCajasControlador {
         return valor;
     }
 
-    public static String buscarNombre(String nombre, int pagina) throws SQLException {
-        int offset = (pagina - 1) * Utiles.REGISTROS_PAGINA;
-        String valor = "";
-        if (Conexion.conectar()) {
-            try {
-                String sql = "select * from detallescajas dp "
-                        + "left join cajas p on p.id_caja=dp.id_caja "
-                        + "left join factura_ventas a on a.id_factura_venta=dp.id_factura_venta "
-                        + "where upper(a.nombre_venta) like '%"
-                        + nombre.toUpperCase()
-                        + "%' "
-                        + "order by id_detallecaja "
-                        + "offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;
-                System.out.println("--> " + sql);
-                try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
-                    ResultSet rs = ps.executeQuery();
-                    String tabla = "";
-                    while (rs.next()) {
-                        tabla += "<tr>"
-                                + "<td>" + rs.getString("id_detallecaja") + "</td>"
-                                + "<td>" + rs.getString("id_caja") + "</td>"
-                                + "<td>" + rs.getString("id_factura_venta") + "</td>"
-                                + "<td>" + rs.getString("numero_factura_venta") + "</td>"
-                                + "<td>" + rs.getInt("total") + "</td>"
-                                + "<td>" + rs.getInt("iva_venta") + "</td>"
-                                + "<td>" + rs.getInt("importe") + "</td>"
-                                + "</tr>";
-                    }
-                    if (tabla.equals("")) {
-                        tabla = "<tr><td  colspan=6>No existen registros ...</td></tr>";
-                    }
-                    ps.close();
-                    valor = tabla;
-                }
-            } catch (SQLException ex) {
-                System.out.println("--> " + ex.getLocalizedMessage());
-            }
-        }
-        Conexion.cerrar();
-        return valor;
-    }
 
     public static boolean agregar(DetallesCajas detallecaja) throws SQLException {
         boolean valor = false;
         if (Conexion.conectar()) {
+            /*
             String sql = "insert into detallescajas "
                     + "(id_caja,id_cuenta,importe) "
                     + "values (?,?,?)";
+                    */
+            String sql = "insert into detallescajas "
+                    + "(id_caja,importe) "
+                    + "values (?,?)";
             try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                 
                 ps.setInt(1, detallecaja.getCaja().getId_caja());
-                ps.setInt(2, detallecaja.getCuenta().getId_cuenta());                            
-                ps.setInt(3, detallecaja.getImporte());
+              //  ps.setInt(2, detallecaja.getCuenta().getId_cuenta());                            
+                ps.setInt(2, detallecaja.getImporte());
                 
                 //ps.setInt(2, detallecaja.getPago().getId_forma_pago()); 
                 //ps.setInt(5, detallecaja.getVuelto());
@@ -309,4 +288,65 @@ public class DetallesCajasControlador {
         Conexion.cerrar();
         return valor;
     }
+    
+    /* BUSCAR CUENTA */
+    /*
+    public static String buscarNombre(String nombre, int pagina) throws SQLException {
+        int offset = (pagina - 1) * Utiles.REGISTROS_PAGINA;
+        String valor = "";
+        if (Conexion.conectar()) {
+            try {
+                /*
+                String sql = "select * from detallescajas dp "
+                        + "left join cajas p on p.id_caja=dp.id_caja "
+                        + "left join factura_ventas a on a.id_factura_venta=dp.id_factura_venta "
+                        + "where upper(a.nombre_venta) like '%"
+                        + nombre.toUpperCase()
+                        + "%' "
+                        + "order by id_detallecaja "
+                        + "offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;
+                */
+    
+    /*
+                
+                String sql = "SELECT * FROM detallescajas dc, cajas c, cuentas_cte cta "
+                        + "c.id_caja = dc.id_caja"
+                        + " AND "
+                        + "a.id_factura_venta = dc.id_factura_venta"
+                        + " AND "
+                        + "upper(a.nombre_venta) like '%"
+                        + nombre.toUpperCase()
+                        + "%' "
+                        + "order by id_detallecaja "
+                        + "offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;
+                
+                System.out.println("--> " + sql);
+                try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
+                    ResultSet rs = ps.executeQuery();
+                    String tabla = "";
+                    while (rs.next()) {
+                        tabla += "<tr>"
+                                + "<td>" + rs.getString("id_detallecaja") + "</td>"
+                                + "<td>" + rs.getString("id_caja") + "</td>"
+                                + "<td>" + rs.getString("id_factura_venta") + "</td>"
+                                + "<td>" + rs.getString("numero_factura_venta") + "</td>"
+                                + "<td>" + rs.getInt("total") + "</td>"
+                                + "<td>" + rs.getInt("iva_venta") + "</td>"
+                                + "<td>" + rs.getInt("importe") + "</td>"
+                                + "</tr>";
+                    }
+                    if (tabla.equals("")) {
+                        tabla = "<tr><td  colspan=6>No existen registros ...</td></tr>";
+                    }
+                    ps.close();
+                    valor = tabla;
+                }
+            } catch (SQLException ex) {
+                System.out.println("--> " + ex.getLocalizedMessage());
+            }
+        }
+        Conexion.cerrar();
+        return valor;
+    }
+ */
 }
