@@ -225,7 +225,8 @@ public class InscripcionesControlador {
                         + " AND " 
                         + "cta.vencimiento_cuota < '"+ fecha_buscar +"'"
                         + " AND "
-                        + "(a.nombre_alumno) like '%" +nombre.toUpperCase() + "%'"
+                        + "( (a.nombre_alumno) like '%" +nombre.toUpperCase() + "%'"
+                        + " OR (a.apellido_alumno) like '%" +nombre.toUpperCase() + "%' )"
                         + " ORDER BY i.id_inscripcion, cta.id_cuenta offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;                        
                System.out.println("BUSCAR CUOTA por NOMBRE --> "+ sql);               
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
