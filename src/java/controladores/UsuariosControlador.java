@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controladores;
 
 import modelos.Roles;
@@ -202,7 +198,7 @@ public class UsuariosControlador {
         Usuarios usuario = null;
         if (Conexion.conectar()) {
             try {
-                String sql = "select * from usuarios";
+                String sql = "SELECT * FROM usuarios";
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                     //ps.setInt(1, id);
                     ResultSet rs = ps.executeQuery();

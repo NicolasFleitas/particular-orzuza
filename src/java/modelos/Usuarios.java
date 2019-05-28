@@ -1,5 +1,5 @@
 package modelos;;
-//import org.json.simple.JSONObject;
+import org.json.simple.JSONObject;
 public class Usuarios {
     private int id_usuario;
     private String nombre_usuario;
@@ -56,13 +56,12 @@ public class Usuarios {
     public void setRol(Roles rol) {
         this.rol = rol;
     }
-    /*
+    
      public JSONObject getJSONString() {
         JSONObject obj = new JSONObject();
         obj.put("id_usuario", this.id_usuario);
-        obj.put("nombre_usuario", this.nombre_usuario);       
+        obj.put("nombre_usuario", this.nombre_usuario); 
         return obj;
     }
-*/
 
 }
