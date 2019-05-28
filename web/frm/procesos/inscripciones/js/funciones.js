@@ -103,11 +103,8 @@ function buscarIdInscripcion() {
             $("#nroci_alumno").val(json.nroci_alumno);            
             $("#id_convocatoria").val(json.id_convocatoria);            
             $("#nombre_convocatoria").val(json.nombre_convocatoria);         
-          /*  $("#id_curso").val(json.id_curso);
-            $("#nombre_curso").val(json.nombre_curso);            
-            $("#id_turno").val(json.id_turno);
-            $("#nombre_turno").val(json.nombre_turno);
-            */
+          
+           
             $("#codigo_convocatoria").val(json.codigo_convocatoria);
             $("#nro_cuotas").val(json.nro_cuotas); 
                      

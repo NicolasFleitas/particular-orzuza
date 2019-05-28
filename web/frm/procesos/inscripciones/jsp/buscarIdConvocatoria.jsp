@@ -1,4 +1,3 @@
-<%@page import="modelos.Turnos"%>
 <%@page import="utiles.Utiles"%>
 <%@page import="controladores.DetallesConvocatoriasControlador"%>
 <%@page import="controladores.ConvocatoriasControlador"%>
