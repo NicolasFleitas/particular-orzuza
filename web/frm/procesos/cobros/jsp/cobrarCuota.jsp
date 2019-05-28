@@ -13,6 +13,7 @@
 <%
     int id_inscripcion = Integer.parseInt(request.getParameter("id_inscripcion"));    
     int nro_cuota_pagar = Integer.parseInt(request.getParameter("nro_cuota_pagar"));    
+    int monto_pagar = Integer.parseInt(request.getParameter("monto_pagar")); 
     
     String tipo = "error";
     String mensaje = "Datos no encontrados.";
@@ -22,11 +23,12 @@
     
     Cuentas cuenta = new Cuentas();
     cuenta.setInscripcion(inscripcion);    
-    cuenta.setCuota_cuota(nro_cuota_pagar);    
+    cuenta.setCuota_cuota(nro_cuota_pagar); 
+    cuenta.setMonto_cuota(monto_pagar);
  
     if (CuentasControlador.modificarestadocobro(cuenta)) {
         tipo = "success";
-        mensaje = "Se cobro la cuota nro " + nro_cuota_pagar;
+        mensaje = "Se cobro la cuota nro " + nro_cuota_pagar + " Monto Cobrado: " + monto_pagar;
     }
     
     JSONObject obj = new JSONObject();
