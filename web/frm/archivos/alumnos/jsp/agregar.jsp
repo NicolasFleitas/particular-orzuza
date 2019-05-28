@@ -11,6 +11,7 @@
     String apellido_alumno = request.getParameter("apellido_alumno");
     int nroci_alumno = Integer.parseInt(request.getParameter("nroci_alumno"));
     String fecha_nac_alumno = request.getParameter("fecha_nac_alumno");    
+    String telefono_alumno = request.getParameter("telefono_alumno");    
     
     //String sfecha_nac_alumno = request.getParameter("fecha_nac_alumno");    
     //java.sql.Date fecha_nac_alumno = Utiles.stringToSqlDate(sfecha_nac_alumno);
@@ -25,7 +26,8 @@
     alumno.setNombre_alumno(nombre_alumno);
     alumno.setApellido_alumno(apellido_alumno);
     alumno.setNroci_alumno(nroci_alumno);
-    alumno.setFecha_nac_alumno(fecha_nac_alumno);          
+    alumno.setFecha_nac_alumno(fecha_nac_alumno); 
+    alumno.setTelefono_alumno(telefono_alumno);    
     alumno.setSexo(sexo); 
     
     if (AlumnosControlador.agregar(alumno)) {

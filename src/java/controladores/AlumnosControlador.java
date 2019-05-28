@@ -1,7 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * AND open the template in the editor.
  */
 package controladores;
 import modelos.Alumnos;
@@ -20,7 +20,7 @@ public class AlumnosControlador {
     
      public static Alumnos buscarCedula(Alumnos alumno) {
         if (Conexion.conectar()) {
-            String sql = "select * from alumnos where nroci_alumno='" + alumno.getNroci_alumno()+ "'";
+            String sql = "SELECT * FROM alumnos WHERE nroci_alumno='" + alumno.getNroci_alumno()+ "'";
             System.out.println(sql);
             try {
                 ResultSet rs = Conexion.getSt().executeQuery(sql);
@@ -39,13 +39,16 @@ public class AlumnosControlador {
     public static boolean agregar(Alumnos alumno){
         boolean valor = false;
         if (Conexion.conectar()){
-            String sql = "insert into alumnos (nombre_alumno,apellido_alumno,nroci_alumno,fecha_nac_alumno,id_sexo)" 
-                    + "values ('" + alumno.getNombre_alumno() + "','"
+            String sql = "insert into alumnos "
+                    + "(nombre_alumno,apellido_alumno,nroci_alumno,fecha_nac_alumno,telefono_alumno,id_sexo)" 
+                    + "values ('" 
+                    + alumno.getNombre_alumno() + "','"
                     + alumno.getApellido_alumno() + "','"
                     + alumno.getNroci_alumno()+ "','"
                     + alumno.getFecha_nac_alumno() + "','"
+                    + alumno.getTelefono_alumno()+ "','"
                     + alumno.getSexo().getId_sexo() + "')";
-                  System.out.println("sql"+ sql);  
+                 
             try {
                 Conexion.getSt().executeUpdate(sql);
                 
@@ -61,12 +64,13 @@ public class AlumnosControlador {
     public static boolean modificar(Alumnos alumno){
         boolean valor = false;
         if (Conexion.conectar()){ 
-            String sql = "update alumnos set nombre_alumno='" + alumno.getNombre_alumno() + "',"
+            String sql = "UPDATE alumnos SET nombre_alumno='" + alumno.getNombre_alumno() + "',"
                     + "apellido_alumno='" + alumno.getApellido_alumno() + "',"
                     + "nroci_alumno='" + alumno.getNroci_alumno()+ "',"
                     + "fecha_nac_alumno='" + alumno.getFecha_nac_alumno()+ "',"
+                    + "telefono_alumno='" + alumno.getTelefono_alumno()+ "',"
                     + "id_sexo='" + alumno.getSexo().getId_sexo()+ "'"
-                    + " where id_alumno=" + alumno.getId_alumno();
+                    + " WHERE id_alumno=" + alumno.getId_alumno();
                     
             try {
                 Conexion.getSt().executeUpdate(sql);
@@ -84,8 +88,7 @@ public class AlumnosControlador {
     public static boolean eliminar(Alumnos alumno){
         boolean valor = false;
         if (Conexion.conectar()){
-            String sql = "delete from alumnos where id_alumno=" + alumno.getId_alumno();
-                    
+            String sql = "DELETE FROM alumnos WHERE id_alumno=" + alumno.getId_alumno();                    
             try {
                 Conexion.getSt().executeUpdate(sql);
                 
@@ -94,20 +97,17 @@ public class AlumnosControlador {
             } catch (SQLException ex) {
                 Logger.getLogger(AlumnosControlador.class.getName()).log(Level.SEVERE, null, ex);
             }        
-        }
-        
-        return valor;
-        
+        }        
+        return valor;        
     }
     
     public static Alumnos buscarId(Alumnos alumno) {
         if (Conexion.conectar()){
-            String sql = "select * from alumnos a, sexos s"
-                    + " where "
+            String sql = "SELECT * FROM alumnos a, sexos s"
+                    + " WHERE "
                     + "a.id_sexo = s.id_sexo"
-                    + " and "
-                    + "id_alumno ='"+alumno.getId_alumno()+"'";
-            
+                    + " AND "
+                    + "id_alumno ='"+alumno.getId_alumno()+"'";            
             try {
                 ResultSet rs = Conexion.getSt().executeQuery(sql);
                 if (rs.next()){
@@ -116,7 +116,7 @@ public class AlumnosControlador {
                     alumno.setApellido_alumno(rs.getString("apellido_alumno"));
                     alumno.setNroci_alumno(rs.getInt("nroci_alumno"));
                     alumno.setFecha_nac_alumno(rs.getString("fecha_nac_alumno"));                    
-                    
+                    alumno.setTelefono_alumno(rs.getString("telefono_alumno"));
                     Sexos sexo = new Sexos();
                     sexo.setId_sexo(rs.getInt("id_sexo"));
                     sexo.setNombre_sexo(rs.getString("nombre_sexo"));
@@ -127,12 +127,12 @@ public class AlumnosControlador {
                     alumno.setNombre_alumno("");
                     alumno.setApellido_alumno("");
                     alumno.setFecha_nac_alumno(null);
+                    alumno.setTelefono_alumno("");
               
                     Sexos sexo = new Sexos();
                     sexo.setId_sexo(0);
                     sexo.setNombre_sexo("");
-                    alumno.setSexo(sexo);
-                 
+                    alumno.setSexo(sexo);                 
                 }
                 
             } catch (SQLException ex) {
@@ -149,11 +149,11 @@ public class AlumnosControlador {
             
             try {
                   System.out.println(nombre);
-                String sql = "select * from alumnos where  upper(nombre_alumno) like '%" +
+                String sql = "SELECT * FROM alumnos WHERE  upper(nombre_alumno) LIKE '%" +
                         nombre.toUpperCase() + "%'"
-                        + "order by id_alumno offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;
+                        + "ORDER BY id_alumno offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;
               
-                System.out.println("--->" + sql);
+               // System.out.println("--->" + sql);
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                     ResultSet rs = ps.executeQuery();
                     String tabla = "";
@@ -162,6 +162,7 @@ public class AlumnosControlador {
                                 + "<td>" + rs.getString("id_alumno") + "</td>"
                                 + "<td>" + rs.getString("nombre_alumno") + "</td>"
                                 + "<td>" + rs.getString("apellido_alumno") + "</td>"
+                                + "<td>" + rs.getString("telefono_alumno") + "</td>"
                                 + "</tr>";
                     }   
                     if (tabla.equals("")) {

@@ -1,3 +1,4 @@
+<%@page import="modelos.Cuentas"%>
 <%@page  import="controladores.InscripcionesControlador"%>
 <%@page  import="org.json.simple.JSONObject"%>
 <%@page  import="java.sql.ResultSet"%>
@@ -7,7 +8,7 @@
     
     String mensaje = "Busqueda exitosa";
     String contenido = InscripcionesControlador.buscarNombreCte(nombre_alumno, pagina);
-    
+      
     JSONObject obj = new JSONObject();
     obj.put("mensaje", mensaje);
     obj.put("contenido", contenido);

@@ -11,36 +11,22 @@ public class Alumnos {
     private String apellido_alumno;
     private int nroci_alumno;
     private String fecha_nac_alumno;
-    
-    private String nombre_medico;
-    private int telefono_medico;
+    private String telefono_alumno;
     private Sexos sexo;
-    private Tutores tutor;
+
 
     public Alumnos() {
     }
 
-    public Alumnos(int id_alumno, String nombre_alumno, String apellido_alumno, int nroci_alumno, String fecha_nac_alumno, String nombre_medico, int telefono_medico, Sexos sexo, Tutores tutor) {
+    public Alumnos(int id_alumno, String nombre_alumno, String apellido_alumno, int nroci_alumno, String fecha_nac_alumno, String telefono_alumno, Sexos sexo) {
         this.id_alumno = id_alumno;
         this.nombre_alumno = nombre_alumno;
         this.apellido_alumno = apellido_alumno;
         this.nroci_alumno = nroci_alumno;
         this.fecha_nac_alumno = fecha_nac_alumno;
-        this.nombre_medico = nombre_medico;
-        this.telefono_medico = telefono_medico;
+        this.telefono_alumno = telefono_alumno;
         this.sexo = sexo;
-        this.tutor = tutor;
     }
-
-    public Tutores getTutor() {
-        return tutor;
-    }
-
-    public void setTutor(Tutores tutor) {
-        this.tutor = tutor;
-    }
-
- 
 
     public int getId_alumno() {
         return id_alumno;
@@ -82,20 +68,12 @@ public class Alumnos {
         this.fecha_nac_alumno = fecha_nac_alumno;
     }
 
-    public String getNombre_medico() {
-        return nombre_medico;
+    public String getTelefono_alumno() {
+        return telefono_alumno;
     }
 
-    public void setNombre_medico(String nombre_medico) {
-        this.nombre_medico = nombre_medico;
-    }
-
-    public int getTelefono_medico() {
-        return telefono_medico;
-    }
-
-    public void setTelefono_medico(int telefono_medico) {
-        this.telefono_medico = telefono_medico;
+    public void setTelefono_alumno(String telefono_alumno) {
+        this.telefono_alumno = telefono_alumno;
     }
 
     public Sexos getSexo() {
@@ -105,6 +83,10 @@ public class Alumnos {
     public void setSexo(Sexos sexo) {
         this.sexo = sexo;
     }
+    
+    
+
+ 
     
 
     

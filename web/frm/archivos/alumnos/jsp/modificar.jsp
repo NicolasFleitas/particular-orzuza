@@ -14,7 +14,8 @@
     //String sfecha_nac_alumno = request.getParameter("fecha_nac_alumno");    
     //java.sql.Date fecha_nac_alumno = Utiles.stringToSqlDate(sfecha_nac_alumno); 
     
-    String fecha_nac_alumno = request.getParameter("fecha_nac_alumno");       
+    String fecha_nac_alumno = request.getParameter("fecha_nac_alumno"); 
+    String telefono_alumno = request.getParameter("telefono_alumno");
     int id_sexo = Integer.parseInt(request.getParameter("id_sexo"));    
     Sexos sexo = new Sexos();
     sexo.setId_sexo(id_sexo);
@@ -28,9 +29,8 @@
     alumno.setApellido_alumno(apellido_alumno);
     alumno.setNroci_alumno(nroci_alumno);
     alumno.setFecha_nac_alumno(fecha_nac_alumno);
-
-    alumno.setSexo(sexo);   
-   
+    alumno.setTelefono_alumno(telefono_alumno);
+    alumno.setSexo(sexo);      
     
     if (AlumnosControlador.modificar(alumno)) {
         tipo = "success";

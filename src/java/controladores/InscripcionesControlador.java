@@ -418,9 +418,10 @@ public class InscripcionesControlador {
                                 
                                 + "<td>" + rs.getString("cuota_cuota") + "</td>"
                                 + "<td>" + rs.getString("total_cuota") + "</td>"
-                                + "<td>" + rs.getString("estado") + "</td>"
-                                
+                                + "<td>" + rs.getString("estado") + "</td>"                                
                                 + "</tr>";
+                        Cuentas cuenta = new Cuentas();
+                        cuenta.setCuota_cuota(rs.getInt("cuota_cuota"));
                     }   
                     if (tabla.equals("")) {
                         tabla = "<tr><td colspan=2> No existen registros...</td></tr>";

@@ -126,6 +126,7 @@ function buscarIdAlumno() {
             $("#nroci_alumno").val(json.nroci_alumno);
             $("#nroci_alumno").attr('disabled');
             $("#fecha_nac_alumno").val(json.fecha_nac_alumno);
+            $("#telefono_alumno").val(json.telefono_alumno);
             $("#id_sexo").val(json.id_sexo);
             $("#nombre_sexo").val(json.nombre_sexo);
             if (json.nuevo === "true") {
@@ -250,6 +251,7 @@ function limpiarFormulario() {
     $("#apellido_alumno").val("");
     $("#nroci_alumno").val("");
     $("#fecha_nac_alumno").val("");
+    $("#telefono_alumno").val("");
     $("#id_sexo").val("");
     $("#nombre_sexo").val("");
 }

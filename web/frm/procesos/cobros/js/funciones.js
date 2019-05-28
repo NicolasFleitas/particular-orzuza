@@ -235,6 +235,7 @@ function buscarNombreInscripcion() {
        success: function (json){
            $("#mensajes").html(json.mensaje);
            $("#contenidoBusqueda").html(json.contenido);
+           $("#monto_pagar").val(json.monto_pagar);
            $("#contenidoBusqueda").fadeIn("fast");
            $("tbody tr").on("click", function(){
               var id = $(this).find("td:first").html();
@@ -411,8 +412,7 @@ function validarBuscarCuota() {
         $("#mensajes").html("Por favor complete la fecha");
         $("#fecha_buscar").focus();
         alert("Fecha vacia!");
-    } 
-    
+    }     
     return valor;
 }
 
@@ -442,4 +442,25 @@ function cobrarCuota() {
     });
 }
 
+function validarPago() {
+    var valor=true;
+    if ($("#nro_cuota_pagar").val().trim()===""){
+        valor=false;
+        $("#mensajes").html("Falta indicar el nro de cuota");
+        $("#nro_cuota_pagar").focus();
+    } else if ($("#nro_cuota_pagar").val() > $("#nro_cuotas").val()){
+        valor=false;
+        $("#mensajes").html("No se puede cobrar, verifique el nro de cuota");
+        $("#nro_cuota_pagar").focus();
+    } else if ($("#monto_pagar").val() > $("#monto_cuota").val() ) {
+        valor=false;
+        $("#mensajes").html("Favor ingrese un valor igual o menor al monto de la cuota");
+        $("#monto_pagar").focus();
+    } else if ($("#monto_pagar").val().trim()==="") {
+        valor=false;
+        $("#mensajes").html("Ingrese el monto a pagar");
+        $("#monto_pagar").focus();
+    }
+    return valor;
+}
 
