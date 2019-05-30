@@ -30,8 +30,7 @@
     obj.put("apellido_alumno", alumno.getApellido_alumno());
     obj.put("nroci_alumno", alumno.getNroci_alumno());
     obj.put("fecha_nac_alumno", alumno.getFecha_nac_alumno());    
-    obj.put("nombre_medico", alumno.getNombre_medico());
-    obj.put("telefono_medico", alumno.getTelefono_medico());
+    
     
     obj.put("id_sexo", alumno.getSexo().getId_sexo());
     obj.put("nombre_sexo", alumno.getSexo().getNombre_sexo());

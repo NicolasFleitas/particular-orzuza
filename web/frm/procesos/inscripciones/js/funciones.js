@@ -177,8 +177,7 @@ function buscarIdAlumno() {
             $("#apellido_alumno").val(json.apellido_alumno);
             $("#nroci_alumno").val(json.nroci_alumno);
             $("#fecha_nac_alumno").val(json.fecha_nac_alumno);            
-            $("#nombre_medico").val(json.nombre_medico);
-            $("#telefono_medico").val(json.telefono_medico);                        
+                                  
             $("#id_sexo").val(json.id_sexo);
             $("#nombre_sexo").val(json.nombre_sexo);
         
