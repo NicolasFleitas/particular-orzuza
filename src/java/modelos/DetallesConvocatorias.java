@@ -50,9 +50,5 @@ public class DetallesConvocatorias {
     public void setProfesor(Profesores profesor) {
         this.profesor = profesor;
     }
-
-    
-
-    
     
 }

@@ -48,7 +48,4 @@ public class Formularios {
         this.menu = menu;
     }
     
-   
-    
-    
 }

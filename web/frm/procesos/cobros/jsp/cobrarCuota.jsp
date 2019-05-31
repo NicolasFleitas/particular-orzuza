@@ -3,11 +3,6 @@
 <%@page import="modelos.Cobros"%>
 <%@page import="modelos.Cuentas"%>
 <%@page import="controladores.CuentasControlador"%>
-<%@page import="controladores.CajasControlador"%>
-<%@page import="controladores.DetallesCajasControlador"%>
-<%@page import="modelos.Cajas"%>
-<%@page import="modelos.FacturaVentas"%>
-<%@page import="modelos.DetallesCajas"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.sql.ResultSet"%>
 <%
@@ -34,7 +29,6 @@
     JSONObject obj = new JSONObject();
     obj.put("tipo", tipo);
     obj.put("mensaje", mensaje);
-
     out.print(obj);
     out.flush();
     

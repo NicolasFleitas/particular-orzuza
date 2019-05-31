@@ -1,14 +1,11 @@
 package modelos;
 
-
 public class Conceptos {
     private int id_concepto;
     private String nombre_concepto;
 
     public Conceptos() {
-    }
-    
-    
+    }   
     
     public Conceptos(int id_concepto, String nombre_concepto) {
         this.id_concepto = id_concepto;

@@ -119,8 +119,8 @@ public class CuentasControlador {
                     + " where id_cobro=" + cobro.getId_cobro();
                     */
            
-           String sql = "UPDATE cuentas_cte SET estado = 'COBRADO' , "
-                   + "monto_cuota = monto_cuota - " + cuenta.getMonto_cuota()
+           String sql = "UPDATE cuentas_cte "
+                   + "SET monto_cuota = monto_cuota - " + cuenta.getMonto_cuota()
                    + " WHERE "
                    + "id_inscripcion = " + cuenta.getInscripcion().getId_inscripcion()
                    + " AND "

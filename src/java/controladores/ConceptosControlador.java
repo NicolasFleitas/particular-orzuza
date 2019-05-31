@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controladores;
 
-/**
- *
- * @author nicof
- */
 import modelos.Conceptos;
 import utiles.Conexion;
 import utiles.Utiles;
@@ -16,74 +7,57 @@ import java.util.logging.Level;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
-
-public class ConceptosControlador {
-    
+public class ConceptosControlador {    
     
      public static boolean agregar(Conceptos concepto){
         boolean valor = false;
         if (Conexion.conectar()){
-            String sql = "insert into conceptos (nombre_concepto)" 
-                    + "values ('" + concepto.getNombre_concepto() + "')";
-                    
+            String sql = "INSERT INTO conceptos (nombre_concepto)" 
+                    + "VALUES('" + concepto.getNombre_concepto() + "')";                    
             try {
-                Conexion.getSt().executeUpdate(sql);
-                
-                valor = true;
-                
+                Conexion.getSt().executeUpdate(sql);                
+                valor = true;                
             } catch (SQLException ex) {
                 Logger.getLogger(ConceptosControlador.class.getName()).log(Level.SEVERE, null, ex);
             }        
-        }
-        
-        return valor;
-        
+        }        
+        return valor;        
     }
      
      public static boolean modificar(Conceptos concepto){
         boolean valor = false;
         if (Conexion.conectar()){ 
-            String sql = "update conceptos set nombre_concepto='" + concepto.getNombre_concepto() + "'"
-                    + " where id_concepto=" + concepto.getId_concepto();
-                    
+            String sql = "UPDATE conceptos SET nombre_concepto='" + concepto.getNombre_concepto() + "'"
+                    + " WHERE id_concepto=" + concepto.getId_concepto();                    
             try {
                 Conexion.getSt().executeUpdate(sql);
-                valor = true;
-                
+                valor = true;                
             } catch (SQLException ex) {
                 Logger.getLogger(ConceptosControlador.class.getName()).log(Level.SEVERE, null, ex);
             }        
-        }
-        
+        }        
         return valor;
-        
     }
     
     public static boolean eliminar(Conceptos concepto){
         boolean valor = false;
         if (Conexion.conectar()){
-            String sql = "delete from conceptos where id_concepto=" + concepto.getId_concepto();
-                    
+            String sql = "DELETE FROM conceptos WHERE id_concepto=" + concepto.getId_concepto();
             try {
                 Conexion.getSt().executeUpdate(sql);
-                
                 valor = true;
-                
             } catch (SQLException ex) {
                 Logger.getLogger(ConceptosControlador.class.getName()).log(Level.SEVERE, null, ex);
             }        
         }
-        
         return valor;
-        
     }
+    
     public static Conceptos buscarId(Conceptos concepto) {
         if (Conexion.conectar()){
-            String sql = "select * from conceptos where id_concepto ='"+concepto.getId_concepto()+"'";
-            
+            String sql = "SELECT * FROM conceptos WHERE id_concepto ='"+concepto.getId_concepto()+"'";
             try {
                 ResultSet rs = Conexion.getSt().executeQuery(sql);
                 if (rs.next()){
@@ -101,18 +75,14 @@ public class ConceptosControlador {
     }
     
     public static String buscarNombre(String nombre, int pagina) {
-      
         int offset = (pagina - 1) * Utiles.REGISTROS_PAGINA;
         String valor = "";
         if (Conexion.conectar()) {
-            
             try {
                   System.out.println(nombre);
-                String sql = "select * from conceptos where upper(nombre_concepto) like '%" +
+                String sql = "SELECT * FROM conceptos WHERE upper(nombre_concepto) LIKE '%" +
                         nombre.toUpperCase() + "%'"
-                        + "order by id_concepto offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;
-              
-                System.out.println("--->" + sql);
+                        + "ORDER BY id_concepto OFFSET " + offset + " LIMIT " + Utiles.REGISTROS_PAGINA;
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                     ResultSet rs = ps.executeQuery();
                     String tabla = "";

@@ -1,14 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package modelos;
-
-/**
- *
- * @author nicof
- */
 public class Profesores {
     private int id_profesor;
     private String nombre_profesor;

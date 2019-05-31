@@ -1,6 +1,4 @@
-
 package controladores;
-
 import modelos.Cobros;
 import utiles.Conexion;
 import utiles.Utiles;
@@ -8,73 +6,57 @@ import java.util.logging.Level;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
-
-public class CobrosControlador {
-    
+public class CobrosControlador {  
     
      public static boolean agregar(Cobros cobro){
         boolean valor = false;
         if (Conexion.conectar()){
-            String sql = "insert into cobros (nombre_cobro)" 
-                    + "values ('" + cobro.getNombre_cobro() + "')";
-                    
+            String sql = "INSERT INTO cobros (nombre_cobro) " 
+                    + "VALUES('" + cobro.getNombre_cobro() + "')";                    
             try {
-                Conexion.getSt().executeUpdate(sql);
-                
-                valor = true;
-                
+                Conexion.getSt().executeUpdate(sql);                
+                valor = true;                
             } catch (SQLException ex) {
                 Logger.getLogger(CobrosControlador.class.getName()).log(Level.SEVERE, null, ex);
             }        
-        }
-        
-        return valor;
-        
+        }        
+        return valor;        
     }
      
      public static boolean modificar(Cobros cobro){
         boolean valor = false;
         if (Conexion.conectar()){ 
-            String sql = "update cobros set nombre_cobro='" + cobro.getNombre_cobro() + "'"
-                    + " where id_cobro=" + cobro.getId_cobro();
-                    
+            String sql = "UPDATE cobros SET nombre_cobro='" + cobro.getNombre_cobro() + "'"
+                    + " WHERE id_cobro=" + cobro.getId_cobro();                    
             try {
                 Conexion.getSt().executeUpdate(sql);
-                valor = true;
-                
+                valor = true;                
             } catch (SQLException ex) {
                 Logger.getLogger(CobrosControlador.class.getName()).log(Level.SEVERE, null, ex);
             }        
-        }
-        
-        return valor;
-        
+        }     
+        return valor;        
     }
     
     public static boolean eliminar(Cobros cobro){
         boolean valor = false;
         if (Conexion.conectar()){
-            String sql = "delete from cobros where id_cobro=" + cobro.getId_cobro();
-                    
+            String sql = "DELETE FROM cobros WHERE id_cobro=" + cobro.getId_cobro();                    
             try {
-                Conexion.getSt().executeUpdate(sql);
-                
-                valor = true;
-                
+                Conexion.getSt().executeUpdate(sql);                
+                valor = true;                
             } catch (SQLException ex) {
                 Logger.getLogger(CobrosControlador.class.getName()).log(Level.SEVERE, null, ex);
             }        
-        }
-        
-        return valor;
-        
+        }        
+        return valor;        
     }
+    
     public static Cobros buscarId(Cobros cobro) {
         if (Conexion.conectar()){
-            String sql = "select * from cobros where id_cobro ='"+cobro.getId_cobro()+"'";
+            String sql = "SELECT * FROM cobros WHERE id_cobro ='"+cobro.getId_cobro()+"'";
             
             try {
                 ResultSet rs = Conexion.getSt().executeQuery(sql);
@@ -92,19 +74,15 @@ public class CobrosControlador {
         return cobro;
     }
     
-    public static String buscarNombre(String nombre, int pagina) {
-      
+    public static String buscarNombre(String nombre, int pagina) {      
         int offset = (pagina - 1) * Utiles.REGISTROS_PAGINA;
         String valor = "";
-        if (Conexion.conectar()) {
-            
+        if (Conexion.conectar()) {            
             try {
                   System.out.println(nombre);
-                String sql = "select * from cobros where upper(nombre_cobro) like '%" +
+                String sql = "SELECT * FROM cobros WHERE upper(nombre_cobro) LIKE '%" +
                         nombre.toUpperCase() + "%'"
-                        + "order by id_cobro offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;
-              
-                System.out.println("--->" + sql);
+                        + "ORDER BY id_cobro OFFSET " + offset + " LIMIT " + Utiles.REGISTROS_PAGINA; 
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                     ResultSet rs = ps.executeQuery();
                     String tabla = "";
@@ -129,10 +107,5 @@ public class CobrosControlador {
         }
         Conexion.cerrar();
         return valor;
-    }
-    
-    
-    
-    
-    
+    }    
 }

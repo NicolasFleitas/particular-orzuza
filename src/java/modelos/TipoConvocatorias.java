@@ -1,10 +1,7 @@
-
 package modelos;
-
 public class TipoConvocatorias {
     private int id_tipoconvocatoria;
-    private String nombre_tipoconvocatoria;
-   
+    private String nombre_tipoconvocatoria;   
     
     public TipoConvocatorias(){
         
@@ -34,7 +31,5 @@ public class TipoConvocatorias {
     public void setNombre_tipoconvocatoria(String nombre_tipoconvocatoria) {
         this.nombre_tipoconvocatoria = nombre_tipoconvocatoria;
     }
-    
-    
     
 }

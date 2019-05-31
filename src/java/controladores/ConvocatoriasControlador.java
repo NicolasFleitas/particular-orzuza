@@ -1,4 +1,3 @@
-
 package controladores;
 
 import modelos.Convocatorias;
@@ -6,26 +5,24 @@ import modelos.TipoConvocatorias;
 import utiles.Conexion;
 import utiles.Utiles;
 import java.sql.Date;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import modelos.Cobros;
 
 public class ConvocatoriasControlador {
     
-     private static ArrayList<Convocatorias> listaConvocatoria;
+     //private static ArrayList<Convocatorias> listaConvocatoria;
    
     public static Convocatorias buscarId(int id) {
         Convocatorias convocatorias = null;
         if (Conexion.conectar()) {
             try {
-                String sql = "select * from convocatorias cv "
-                        + "left join tipoconvocatorias tp "
+                String sql = "SELECT * from convocatorias cv "
+                        + "LEFT JOIN tipoconvocatorias tp "
                         + "on cv.id_tipoconvocatoria=tp.id_tipoconvocatoria"                       
-                        + " where id_convocatoria=?";
+                        + " WHERE id_convocatoria=?";
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                     ps.setInt(1, id);
                     ResultSet rs = ps.executeQuery();
@@ -60,10 +57,10 @@ public class ConvocatoriasControlador {
         Convocatorias convocatorias = null;
         if (Conexion.conectar()) {
             try {
-                String sql = "select * from convocatorias cv "
-                        + "left join tipoconvocatorias tp "
+                String sql = "SELECT * from convocatorias cv "
+                        + "LEFT JOIN tipoconvocatorias tp "
                         + "on cv.id_tipoconvocatoria=tp.id_tipoconvocatoria"
-                        + " where codigo_convocatoria like ? ";
+                        + " WHERE codigo_convocatoria like ? ";
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                     ps.setString(1, codigo);
                     ResultSet rs = ps.executeQuery();
@@ -100,10 +97,10 @@ public class ConvocatoriasControlador {
         String valor = "";
         if (Conexion.conectar()) {
             try {
-                String sql = "select * from convocatorias cv "
-                        + "left join tipoconvocatorias tp "
+                String sql = "SELECT * FROM convocatorias cv "
+                        + "LEFT JOIN tipoconvocatorias tp "
                         + "on cv.id_tipoconvocatoria=tp.id_tipoconvocatoria"
-                        + " where "
+                        + " WHERE "
                         + "cv.convocatoria_estado like 'HABILITADO' and upper(nombre_tipoconvocatoria) like '%"
                         + nombre.toUpperCase()
                         + "%' "
@@ -192,7 +189,7 @@ public class ConvocatoriasControlador {
                     + "codigo_convocatoria=?,"                    
                     + "fecha_convocatoria=?," 
                     + "convocatoria_estado=? "
-                    + "where id_convocatoria=?";
+                    + "WHERE id_convocatoria=?";
             System.out.println(sql);
             try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                ps.setInt(1, convocatoria.getTipoconvocatoria().getId_tipoconvocatoria());
@@ -224,7 +221,7 @@ public class ConvocatoriasControlador {
     public static boolean eliminar(Convocatorias convocatoria  ) {
         boolean valor = false;
         if (Conexion.conectar()) {
-            String sql = "delete from convocatorias where id_convocatoria=?";
+            String sql = "delete from convocatorias WHERE id_convocatoria=?";
             try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                 ps.setInt(1, convocatoria.getId_convocatoria());
                 ps.executeUpdate();
@@ -246,14 +243,14 @@ public class ConvocatoriasControlador {
     
     
     
-     
+     /*
       public ArrayList listarConvocatoria() {
         listaConvocatoria = new ArrayList();
         Convocatorias convocatoria = null;
         if (Conexion.conectar()) {
             try {
-                String sql = "select * from convocatorias cv, tipoconvocatorias tp, turnos t, tipoconvocatorias tp"
-                        + " where "
+                String sql = "SELECT * from convocatorias cv, tipoconvocatorias tp, turnos t, tipoconvocatorias tp"
+                        + " WHERE "
                         + "cv.id_tipoconvocatoria = tp.id_tipoconvocatoria"
                         + " and "
                         + " convocatoria_estado like 'HABILITADO'";
@@ -286,7 +283,7 @@ public class ConvocatoriasControlador {
         return listaConvocatoria;
 
     }
-    
+    */
     
 }
 

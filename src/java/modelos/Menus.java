@@ -1,6 +1,5 @@
 package modelos;
 
-
 public class Menus {
     private int id_menu;
     private String codigo_menu;

@@ -27,11 +27,5 @@ public class Materias {
     public void setNombre_materia(String nombre_materia) {
         this.nombre_materia = nombre_materia;
     }
-    
-    
-
-   
-
-  
- 
+     
 }
