@@ -1,5 +1,5 @@
 <%@page import="modelos.Materias"%>
-<%@page import="modelos.Turnos"%>
+
 <%@page import="controladores.DetallesConvocatoriasControlador"%>
 <%@page import="modelos.Profesores"%>
 <%@page import="modelos.Convocatorias"%>
