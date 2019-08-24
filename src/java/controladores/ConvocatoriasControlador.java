@@ -114,10 +114,11 @@ public class ConvocatoriasControlador {
                     String tabla = "";
                     while (rs.next()) {
                         tabla += "<tr>"
-                                + "<td>" + rs.getString("id_convocatoria") + "</td>"                                
-                               // + "<td>" + rs.getString("codigo_convocatoria") + "</td>"                                
+                                + "<td>" + rs.getString("id_convocatoria") + "</td>"     
+                                + "<td>" + rs.getString("nombre_convocatoria") + "</td>"                                                              
                                 + "<td>" + rs.getString("nombre_tipoconvocatoria") + "</td>" 
                                 + "<td>" + rs.getString("convocatoria_estado") + "</td>"   
+                                + "<td>" + rs.getString("codigo_convocatoria") + "</td>" 
                                 + "</tr>";
                     }
                     if (tabla.equals("")) {

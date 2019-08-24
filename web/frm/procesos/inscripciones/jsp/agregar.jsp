@@ -1,7 +1,7 @@
 <%@page import="utiles.Utiles"%>
 <%@page import="modelos.Convocatorias"%>
 <%@page import="modelos.Alumnos"%>
-<%@page import="modelos.Cuentas_cte"%>
+<%@page import="modelos.Cuentas"%>
 <%@page import="controladores.InscripcionesControlador"%>
 <%@page import="controladores.CuentasControlador"%>
 <%@page import="modelos.Inscripciones"%>

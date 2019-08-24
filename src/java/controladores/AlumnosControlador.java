@@ -11,6 +11,25 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 
 public class AlumnosControlador {
+    
+    public static Alumnos buscarCedula(Alumnos alumno) {
+        if (Conexion.conectar()) {
+            String sql = "select * from alumnos where nroci_alumno='" + alumno.getNroci_alumno()+ "'";
+            System.out.println(sql);
+            try {
+                ResultSet rs = Conexion.getSt().executeQuery(sql);
+                if (rs.next()) {
+                    alumno.setNroci_alumno(0);
+                } else {
+                    alumno.setNroci_alumno(alumno.getNroci_alumno());
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error: " + ex);
+            }
+        }
+        return alumno;
+    }
+    
     public static boolean agregar(Alumnos alumno){
         boolean valor = false;
         if (Conexion.conectar()){
