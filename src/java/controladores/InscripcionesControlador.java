@@ -319,21 +319,29 @@ public class InscripcionesControlador {
 
     public static Inscripciones buscarIdCte(Inscripciones inscripcion) {
         if (Conexion.conectar()){
-            String sql = "select * from inscripciones i,"
-                    + "alumnos a,"
-                    + "convocatorias cv,"
-                    + "cuentas_cte cta"
-                    + " where "
-                    + "i.id_alumno=a.id_alumno"
+            String sql = "SELECT COUNT(*) as TOTAL_CUOTAS_PENDIENTES,"
+                    + "i.id_inscripcion, i.fecha_inscripcion,i.nro_cuotas,i.vencimientocuota_inscripcion,"
+                    + "a.id_alumno, a.nombre_alumno, a.apellido_alumno,a.nroci_alumno,"
+                    + "cv.id_convocatoria,cv.monto_convocatoria,cv.codigo_convocatoria, cv.nombre_convocatoria"                            
+                    + " FROM inscripciones i,alumnos a,convocatorias cv,cuentas_cte cta"
+                    + " WHERE "
+                    + "i.id_alumno=a.id_alumno AND i.id_convocatoria=cv.id_convocatoria"
                     + " AND "
-                    + "i.id_convocatoria=cv.id_convocatoria"
-                    + " AND "   
-                     + "i.id_inscripcion=cta.id_inscripcion"
-                    + " AND " 
-                    + " i.id_inscripcion ='"+inscripcion.getId_inscripcion()+"'";
-            
+                    + "i.id_inscripcion=cta.id_inscripcion "
+                    + " AND "
+                    + "cta.estado ='PENDIENTE'"
+                    + " AND "
+                    + "i.id_inscripcion ='" + inscripcion.getId_inscripcion() + "'"
+                    + " GROUP BY "
+                    + "i.id_inscripcion, i.fecha_inscripcion,i.nro_cuotas,"
+                    + "a.id_alumno,a.nombre_alumno, a.apellido_alumno, a.nroci_alumno,"
+                    + "cv.id_convocatoria,cv.nombre_convocatoria,cv.codigo_convocatoria,cv.monto_convocatoria,"
+                    + "cta.estado";
+           
             try {
                 ResultSet rs = Conexion.getSt().executeQuery(sql);
+                
+                
                 if (rs.next()){
                     inscripcion.setId_inscripcion(rs.getInt("id_inscripcion"));
                     inscripcion.setFecha_inscripcion(rs.getDate("fecha_inscripcion"));
@@ -353,10 +361,11 @@ public class InscripcionesControlador {
                     inscripcion.setAlumno(alumno);
                     inscripcion.setConvocatoria(convocatoria);  
                     
-                    inscripcion.setNro_cuotas(rs.getInt("nro_cuotas"));
+                   //inscripcion.setNro_cuotas(rs.getInt("nro_cuotas"));
                     inscripcion.setFecha_inscripcion(rs.getDate("fecha_inscripcion"));
                     
-                    
+                    inscripcion.setNro_cuotas(rs.getInt("TOTAL_CUOTAS_PENDIENTES"));
+                                        
                 } else {    
                    inscripcion.setId_inscripcion(0);
                    //Obtengo la fecha actual para luego asignarla si no se encuentra creada la inscripcion

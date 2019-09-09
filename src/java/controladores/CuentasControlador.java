@@ -121,8 +121,9 @@ public class CuentasControlador {
            
            String sql = "UPDATE cuentas_cte "
                    + "SET monto_cuota = monto_cuota - " + cuenta.getMonto_cuota()
+                   + ", estado = '" + cuenta.getEstado() + "'"
                    + " WHERE "
-                   + "id_inscripcion = " + cuenta.getInscripcion().getId_inscripcion()
+                   + "id_inscripcion = " + cuenta.getInscripcion().getId_inscripcion()  
                    + " AND "
                    + "cuota_cuota = " + cuenta.getCuota_cuota() ;
             try {
@@ -132,10 +133,8 @@ public class CuentasControlador {
             } catch (SQLException ex) {
                 Logger.getLogger(CuentasControlador.class.getName()).log(Level.SEVERE, null, ex);
             }        
-        }
-        
-        return valor;
-        
+        }        
+        return valor;        
     }
 
 }

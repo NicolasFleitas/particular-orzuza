@@ -16,6 +16,7 @@
         <div class="panel-heading centrado">Cobros | <span id="susuario_usuario"></span></div>
         <div class="panel-body">
             <form id="formPrograma"> 
+<!--
                <div class="row" hidden="">
                     <div class="col-sm-1 col-md-1">
                         <span>ID</span>
@@ -27,7 +28,9 @@
                         <button id="botonBuscarIdCobro" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>
                     </div>
                 </div>
+-->
 
+<!--
                 <div class="row" hidden="">
                     <div class="col-sm-1 col-md-1">
                         <span>Descripcion</span>
@@ -37,98 +40,116 @@
                             placeholder="Nombre" onkeypress=" return soloLetras(event)" onkeyup="this.value = this.value.toUpperCase()">
                     </div>
                 </div>
+
+-->
                 
-                    <!--******************************* --> 
+                    <!-- BOTON PARA CONSULTAR TODAS LAS CUOTAS --> 
                     <div class="row">                 
                         <!--<center> <label>Ver estado </label> </center>-->                       
                         <div class="col-md-2 col-xs-4 col-sm-3">
                             <button id="botonCuota" type="button" class="btn btn-primary btn-sm"><span class="">Consultar cuotas</span></button>
                         </div>
-                        
-                         <div class="col-xs-3 col-sm-1 col-md-3">
+                    <!-- BOTON PARA IMPRIMIR UN REPORTE CON LA CUENTA ACTUAL MOSTRADA EN PANTALLA -->
+                    
+                        <div class="col-xs-3 col-sm-1 col-md-3">
                             <button id="botonImprimir" type="button" class="btn btn-primary btn-sm">Cuenta Actual</button> 
                         </div>                        
                     </div>
-                    <hr> 
-                    <!-- ***************************** -->
-                 <div class="row">
-                        <div class="col-xs-1 col-sm-1 col-md-1">
-                            <span>Nº</span>
-                        </div>
-                        <div class="col-xs-2 col-sm-1 col-md-1">
-                            <input id="id_inscripcion" name="id_inscripcion" type="text" class="form-control input-sm"
-                                   placeholder="nº" onkeypress="return SoloNumeros(event)">
-                        </div>
-                     
-                        <div class="col-xs-8 col-sm-1 col-md-1">
-                            <button id="botonBuscarIdInscripcion" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>                            
-                        </div>
-                     
-                        <div class="col-md-2 col-xs-3 col-sm-2">
-                            <span>Fecha de ingreso</span>
-                        </div>                     
-                        <div class="col-md-2 col-xs-5 col-sm-4">
-                            <input readonly="" id="fecha_inscripcion" name="fecha_inscripcion" type="date" class="form-control input-sm ">
-                        </div>
-                    </div>
-                    <br>                                
-                 <div class="row">
-                        <div class="col-xs-3 col-sm-2 col-md-1">
-                            <span>Nombre</span>
-                        </div>
-                        <div class="col-xs-8 col-sm-4 col-md-3">
-                            <input id="nombre_alumno" name="nombre_alumno" type="text" class="form-control input-sm"
-                                   placeholder="Nombre" onkeypress=" return soloLetras(event)" disabled="disabled" onkeyup="this.value = this.value.toUpperCase()">
-                        </div>
-                      
-                       <div class="col-xs-3 col-sm-2 col-md-1">
-                            <span>Apellido</span>
-                        </div>
-                        <div class="col-xs-8 col-sm-4 col-md-3">
-                            <input id="apellido_alumno" name="apellido_alumno" type="text" class="form-control input-sm"
-                                   placeholder="Apellido" onkeypress=" return soloLetras(event)" disabled="disabled" onkeyup="this.value = this.value.toUpperCase()">
-                        </div>
-                      
-                     <div class="col-xs-3 col-sm-2 col-md-1" hidden="">
-                            <span>C.I.:</span>
-                        </div>
-                        <div class="col-xs-8 col-sm-4 col-md-3" hidden="">
-                            <input id="nroci_alumno" name="nroci_alumno" type="text" class="form-control input-sm"
-                                   placeholder="c.i.nº" onkeypress=" return SoloNumeros(event)" disabled="disabled">
-                        </div>
-                    </div>                    
-                    <hr>                     
-                  <div class="row">
-                       <div class="col-xs-2 col-sm-1 col-md-1">
-                            <span>Curso</span>
-                        </div>
-
-                        <div class="col-xs-2 col-sm-2 col-md-1">
-                            <input readonly="" id="codigo_convocatoria" name="codigo_convocatoria" type="text" class="form-control input-sm"
-                                   placeholder="codigo">
-                        </div>
-                      <div class="col-xs-2 col-sm-2 col-md-1">
-                                <span>Nombre</span>
-                        </div>
-                         <div class="col-sm-2 col-sm-2 col-md-3">
-                                <input readonly="" id="nombre_convocatoria" name="nombre_convocatoria" type="text" class="form-control input-sm"
-                                       placeholder="nombre curso">
-                         </div>
-
-                       <div class="col-xs-2 col-sm-1 col-md-1">
-                                <span>NºCuotas</span>
-                       </div>
-
-                        <div class="col-xs-2 col-sm-2 col-md-1">
-                            <input readonly="" id="nro_cuotas" name="nro_cuotas" type="number" min="0" max="12" class="form-control input-sm">
-                        </div> 
-                       <div class="col-xs-2 col-sm-2 col-md-1">
-                            <input readonly="" id="monto_cuota" name="monto_cuota" class="form-control input-sm">
-                        </div> 
-                    </div>
                     
-                    <hr>                       
+                    <hr> 
+                    
+                 <!-- ***************************** -->
+                 <div class="row">
+                     <div class="col-xs-1 col-sm-1 col-md-1">
+                         <span>ID Ins</span>
+                     </div>
+                     <div class="col-xs-2 col-sm-1 col-md-1">
+                         <input id="id_inscripcion" name="id_inscripcion" type="text" class="form-control input-sm"
+                                placeholder="nº" onkeypress="return SoloNumeros(event)">
+                     </div>
+                     
+                     <!-- BUSCA LAS INSCRIPCIONES QUE POSEEN CUENTAS -->                     
+                     <div class="col-xs-8 col-sm-1 col-md-1">
+                         <button id="botonBuscarIdInscripcion" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search"></span></button>                            
+                     </div>
+
+                     <div class="col-md-2 col-xs-3 col-sm-2">
+                         <span>Fecha de ingreso</span>
+                     </div>
+                     
+                     <div class="col-md-2 col-xs-5 col-sm-4">
+                         <input readonly="" id="fecha_inscripcion" name="fecha_inscripcion" type="date" class="form-control input-sm ">
+                     </div>
+                 </div>
                  
+                 <br>
+                 
+                 <div class="row">
+                     <div class="col-xs-3 col-sm-2 col-md-1">
+                         <span>Nombre</span>
+                     </div>
+                     <div class="col-xs-8 col-sm-4 col-md-3">
+                         <input id="nombre_alumno" name="nombre_alumno" type="text" class="form-control input-sm"
+                                placeholder="Nombre" disabled="disabled" onkeyup="this.value = this.value.toUpperCase()">
+                     </div>
+
+                     <div class="col-xs-3 col-sm-2 col-md-1">
+                         <span>Apellido</span>
+                     </div>
+                     
+                     <div class="col-xs-8 col-sm-4 col-md-3">
+                         <input id="apellido_alumno" name="apellido_alumno" type="text" class="form-control input-sm"
+                                placeholder="Apellido" disabled="disabled">
+                     </div>
+
+                     <div class="col-xs-3 col-sm-2 col-md-1" hidden="">
+                         <span>C.I.</span>
+                     </div>
+                     <div class="col-xs-8 col-sm-4 col-md-3" hidden="">
+                         <input id="nroci_alumno" name="nroci_alumno" type="text" class="form-control input-sm"
+                                placeholder="c.i.nº" disabled="disabled">
+                     </div>
+                 </div>                    
+                 <hr>                     
+                 <div class="row">
+                     <div class="col-xs-2 col-sm-1 col-md-1">
+                         <span>Curso</span>
+                     </div>
+
+                     <div class="col-xs-2 col-sm-2 col-md-1">
+                         <input readonly="" id="codigo_convocatoria" name="codigo_convocatoria" type="text" class="form-control input-sm"
+                                placeholder="codigo">
+                     </div>
+                     <div class="col-xs-2 col-sm-2 col-md-1">
+                         <span>Nombre</span>
+                     </div>
+                     <div class="col-sm-2 col-sm-2 col-md-3">
+                         <input readonly="" id="nombre_convocatoria" name="nombre_convocatoria" type="text" class="form-control input-sm"
+                                placeholder="nombre curso">
+                     </div>
+
+                     <div class="col-xs-2 col-sm-1 col-md-1">
+                         <span>NºCuotas</span>
+                     </div>
+                     <div class="col-xs-2 col-sm-2 col-md-1">
+                         <input readonly="" id="nro_cuotas" name="nro_cuotas" type="number" min="0" max="12" class="form-control input-sm">
+                     </div> 
+                     
+                      <div class="col-xs-2 col-sm-1 col-md-1">
+                         <span>Monto cuota</span>
+                     </div>
+                     <div class="col-xs-2 col-sm-2 col-md-1">
+                         <input readonly="" id="monto_cuota" name="monto_cuota" class="form-control input-sm">
+                     </div> 
+                     
+                   
+                 </div>
+
+                    <hr>                       
+                    <div class="row">
+                        <center>Cobros de cuotas</center>
+                    </div>
+                    <br>
                  <div class="row">                     
                      <div class="col-xs-2 col-sm-1 col-md-1">
                                 <span>Cuota Nº</span>
@@ -143,17 +164,30 @@
                      <div class="col-xs-2 col-sm-2 col-md-2">
                          <input id="monto_pagar" name="monto_pagar" class="form-control input-sm"
                                 onkeypress="return SoloNumeros(event)">
-                     </div>                     
+                     </div>
+
+                     <div class="col-xs-2 col-sm-2 col-md-1">
+                         <span>Tipo Pago</span>                         
+                     </div>                    
+                     <div class="col-md-2">
+                        <input id="tipo_pago" name="tipo_pago" type="text" 
+                               class="form-control input-sm" list="estado" placeholder="Tipo pago">
+                        <datalist id="estado">
+                            <option>PENDIENTE</option>
+                            <option>CANCELADO</option>                                
+                        </datalist>
+                    </div> 
+                     
                      <div class="col-md-2 col-xs-4 col-sm-2">
                             <button id="botonCobrar_cuota" type="button" class="btn btn-primary btn-sm"><span class="">Cobrar Cuota</span></button>
                      </div>
                  </div>
         </form>
         </div>
-        <div class="panel-footer centrado">
-            <button id="botonAgregar" type="button" class="btn btn-primary btn-sm">Agregar</button>
-            <button id="botonModificar" type="button" class="btn btn-primary btn-sm">Modificar</button>
-            <button id="BotonEliminar" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#confirmarEliminar">Eliminar</button>
+        <div class="panel-footer centrado" >
+         <!--   <button id="botonAgregar" type="button" class="btn btn-primary btn-sm">Agregar</button> -->
+            <!-- <button id="botonModificar" type="button" class="btn btn-primary btn-sm">Modificar</button> -->
+            <!-- <button id="BotonEliminar" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#confirmarEliminar">Eliminar</button> -->
             <button id="botonSalir" type="button" class="btn btn-primary btn-sm">Salir</button>
         </div>
     </div>
@@ -187,7 +221,7 @@
         $("#buscar").css("display", "none");
        // $("#id_cobro").focus();
        // siguienteCampo("#id_cobro", "#nombre_cobro", false);
-        $("#id_cobro").focusout(function (event) {
+       /* $("#id_cobro").focusout(function (event) {
             if ($("#id_cobro").val() === "") {
                 $("#id_cobro").val("0");
             }
@@ -198,7 +232,8 @@
             $("#buscar").fadeIn("slow");
             $("#panelPrograma").fadeOut("slow");
         });
-        $("#botonAgregar").on('click', function () {
+    */
+      /*  $("#botonAgregar").on('click', function () {
             if (validarFormulario()) {
             agregarCobro();
             }  
@@ -212,6 +247,8 @@
             eliminarCobro();
             $('#confirmarEliminar').modal('hide');
         });
+    
+    */
         $("#botonSalir").on('click', function () {
             location.href = "../../../menu.html";
         });
@@ -220,10 +257,10 @@
         
          $("#id_inscripcion").focusout(function (event) {
          if ($("#id_inscripcion").val() === "") {
-         $("#id_inscripcion").val("0");
-                                           }
-                                           buscarIdInscripcion();
-                                       });
+            $("#id_inscripcion").val("0");
+         }
+         buscarIdInscripcion();
+        });
                                        
         $("#botonBuscarIdInscripcion").on('click', function () {
             $("#buscar").load("buscarInscripcion.html");
@@ -231,17 +268,17 @@
             $("#panelPrograma").fadeOut("fast");
         });
         
-         $("#botonCuota").on('click', function () {
-                                           $("#buscar").load("buscarCuotasVencidas.html");
-                                           $("#buscar").fadeIn("fast");
-                                           $("#panelPrograma").fadeOut("fast");
-                                       });
+        $("#botonCuota").on('click', function () {
+        $("#buscar").load("buscarCuotasVencidas.html");
+        $("#buscar").fadeIn("fast");
+        $("#panelPrograma").fadeOut("fast");
+        });
                                        
-            $("#botonCobrar_cuota").on('click', function () {
-                if (validarPago()) {
-                    cobrarCuota();
-                }  
-             });
+        $("#botonCobrar_cuota").on('click', function () {
+        if (validarPago()) {
+            cobrarCuota();
+        }  
+        });
         
            $("#botonImprimir").on('click', function () {
                if ($("#id_inscripcion").val() === "") {

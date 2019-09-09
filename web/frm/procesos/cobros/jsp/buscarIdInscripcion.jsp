@@ -8,16 +8,15 @@
 <%@page import="java.sql.ResultSet"%>
 <%
     int id_inscripcion = Integer.parseInt(request.getParameter("id_inscripcion"));
-    
+    int TOTAL_CUOTAS_PENDIENTES = 0;
+   
     String tipo = "error";
     String mensaje = "Datos no encontrados.";
     String nuevo = "true";
     Inscripciones inscripcion = new Inscripciones();
     inscripcion.setId_inscripcion(id_inscripcion);
     
-    Cuentas cuenta = new Cuentas();
-    
-    
+    Cuentas cuenta = new Cuentas();   
    InscripcionesControlador.buscarIdCte(inscripcion);
    
     if (inscripcion.getId_inscripcion()!=0){
@@ -41,11 +40,13 @@
     obj.put("nombre_convocatoria", inscripcion.getConvocatoria().getNombre_convocatoria());
     obj.put("codigo_convocatoria",inscripcion.getConvocatoria().getCodigo_convocatoria());
     obj.put("nro_cuotas", inscripcion.getNro_cuotas());
-    
-    obj.put("cuota_cuota", cuenta.getCuota_cuota());
     obj.put("monto_cuota", inscripcion.getConvocatoria().getMonto_convocatoria());
+    
+    obj.put("TOTAL_CUOTAS_PENDIENTES", TOTAL_CUOTAS_PENDIENTES);
+    obj.put("CANT_CUOTAS_PENDIENTES", inscripcion.getNro_cuotas());
+   /* obj.put("cuota_cuota", cuenta.getCuota_cuota());    
     obj.put("estado", cuenta.getEstado());
-            
+     */       
     out.print(obj);
     out.flush();
 %>
