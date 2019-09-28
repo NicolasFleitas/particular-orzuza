@@ -9,15 +9,6 @@ function validarBuscarCuota() {
     }     
     return valor;
 }
-/*
-function validarFormulario(){
-    var valor=true;
-    if ($("#nombre_cobro").val().trim()===""){
-        valor=false;
-        $("#mensajes").html("Ingrese un nombre de cobro por favor");
-        $("#nombre_cobro").focus();    } 
-    return valor;
-}*/
 
 function validarPago() {
     var valor=true;
@@ -25,11 +16,13 @@ function validarPago() {
         valor=false;
         $("#mensajes").html("Falta indicar el nro. de cuota");
         $("#nro_cuota_pagar").focus();
-    } else if ($("#nro_cuota_pagar").val() > $("#nro_cuotas").val()){
+    } 
+    /* else if ($("#nro_cuota_pagar").val() > $("#nro_cuotas").val()){
         valor=false;
         $("#mensajes").html("No se puede cobrar, verifique el nro de cuota");
         $("#nro_cuota_pagar").focus();
-    } else if ($("#monto_pagar").val() > $("#monto_cuota").val() ) {
+    }*/ 
+    else if ($("#monto_pagar").val() > $("#monto_cuota").val() ) {
         valor=false;
         $("#mensajes").html("Favor ingrese un valor igual o menor al monto de la cuota");
         $("#monto_pagar").focus();
@@ -37,6 +30,10 @@ function validarPago() {
         valor=false;
         $("#mensajes").html("Ingrese el monto a pagar");
         $("#monto_pagar").focus();
+    } else if ($("#fecha_pago").val().trim()==="") {
+        valor=false;
+        $("#mensajes").html("Ingrese la fecha del pago");
+        $("#fecha_pago").focus();
     }
     return valor;
 }
@@ -65,11 +62,7 @@ function cobrarCuota() {
     });
 }
 // LIMPIAR INPUTS
-/*
-function limpiarFormulario() {
-        $("#id_cobro").val("");
-        $("#nombre_cobro").val("");        
-}*/
+
 /*INSCRIPCIONES*/
 function buscarIdInscripcion() {
     var datosFormulario = $("#formPrograma").serialize();
@@ -94,8 +87,9 @@ function buscarIdInscripcion() {
 
             $("#nombre_convocatoria").val(json.nombre_convocatoria); 
             $("#codigo_convocatoria").val(json.codigo_convocatoria);
-            $("#nro_cuotas").val(json.nro_cuotas);                  
+            $("#nro_cuotas").val(json.nro_cuotas);  
             $("#monto_cuota").val(json.monto_cuota);
+            $("#total_cuota").val(json.monto_cuota);
         },
         error: function (e) {
             $("#mensajes").html("No se pudo modificar los datos.");
@@ -106,6 +100,7 @@ function buscarIdInscripcion() {
         }
     });
 }
+//ESTA FUNCION BUSCA LAS INSCRIPCIONES CON CUENTAS Y SUS RESPECTIVAS CUOTAS
 function buscarNombreInscripcion() {
     var datosFormulario = $("#formBuscar").serialize();  
     $.ajax({
@@ -120,7 +115,7 @@ function buscarNombreInscripcion() {
        success: function (json){
            $("#mensajes").html(json.mensaje);
            $("#contenidoBusqueda").html(json.contenido);
-           $("#monto_pagar").val(json.monto_pagar);
+          // TODO $("#monto_pagar").val(json.monto_pagar);
            $("#contenidoBusqueda").fadeIn("fast");
            $("tbody tr").on("click", function(){
               var id = $(this).find("td:first").html();

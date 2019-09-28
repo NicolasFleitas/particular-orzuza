@@ -16,7 +16,7 @@
     Inscripciones inscripcion = new Inscripciones();
     inscripcion.setId_inscripcion(id_inscripcion);
     
-    Cuentas cuenta = new Cuentas();   
+   Cuentas cuenta = new Cuentas();   
    InscripcionesControlador.buscarIdCte(inscripcion);
    
     if (inscripcion.getId_inscripcion()!=0){

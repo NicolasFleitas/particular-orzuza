@@ -89,8 +89,8 @@
                          <span>Nombre</span>
                      </div>
                      <div class="col-xs-8 col-sm-4 col-md-3">
-                         <input id="nombre_alumno" name="nombre_alumno" type="text" class="form-control input-sm"
-                                placeholder="Nombre" disabled="disabled" onkeyup="this.value = this.value.toUpperCase()">
+                         <input readonly="" id="nombre_alumno" name="nombre_alumno" type="text" class="form-control input-sm"
+                                placeholder="Nombre">
                      </div>
 
                      <div class="col-xs-3 col-sm-2 col-md-1">
@@ -98,8 +98,8 @@
                      </div>
                      
                      <div class="col-xs-8 col-sm-4 col-md-3">
-                         <input id="apellido_alumno" name="apellido_alumno" type="text" class="form-control input-sm"
-                                placeholder="Apellido" disabled="disabled">
+                         <input readonly="" id="apellido_alumno" name="apellido_alumno" type="text" class="form-control input-sm"
+                                placeholder="Apellido">
                      </div>
 
                      <div class="col-xs-3 col-sm-2 col-md-1" hidden="">
@@ -107,7 +107,7 @@
                      </div>
                      <div class="col-xs-8 col-sm-4 col-md-3" hidden="">
                          <input id="nroci_alumno" name="nroci_alumno" type="text" class="form-control input-sm"
-                                placeholder="c.i.nº" disabled="disabled">
+                                placeholder="c.i.nº" readonly="">
                      </div>
                  </div>                    
                  <hr>                     
@@ -147,7 +147,7 @@
 
                     <hr>                       
                     <div class="row">
-                        <center>Cobros de cuotas</center>
+                        <center><b>Cobros de cuotas</b></center>
                     </div>
                     <br>
                  <div class="row">                     
@@ -155,7 +155,7 @@
                                 <span>Cuota Nº</span>
                      </div>                     
                      <div class="col-md-1">
-                         <input id="nro_cuota_pagar" name="nro_cuota_pagar" class="form-control input-sm" 
+                         <input type="number" id="nro_cuota_pagar" name="nro_cuota_pagar" class="form-control input-sm" 
                                 onkeypress="return SoloNumeros(event)">
                      </div>                     
                      <div class="col-xs-2 col-sm-2 col-md-1">
@@ -178,7 +178,15 @@
                         </datalist>
                     </div> 
                      
-                     <div class="col-md-2 col-xs-4 col-sm-2">
+                      <div class="col-md-2 col-xs-3 col-sm-2">
+                         <span>Fecha pago</span>
+                     </div>
+                     
+                     <div class="col-md-2 col-xs-5 col-sm-4">
+                         <input id="fecha_pago" name="fecha_pago" type="date" class="form-control input-sm ">
+                     </div>
+                     
+                     <div class="col-md-1">
                             <button id="botonCobrar_cuota" type="button" class="btn btn-primary btn-sm"><span class="">Cobrar Cuota</span></button>
                      </div>
                  </div>

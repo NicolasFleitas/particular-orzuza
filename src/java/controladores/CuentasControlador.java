@@ -122,6 +122,7 @@ public class CuentasControlador {
            String sql = "UPDATE cuentas_cte "
                    + "SET monto_cuota = monto_cuota - " + cuenta.getMonto_cuota()
                    + ", estado = '" + cuenta.getEstado() + "'"
+                   + ",fecha_pago = '" + cuenta.getFecha_pago() + "'"
                    + " WHERE "
                    + "id_inscripcion = " + cuenta.getInscripcion().getId_inscripcion()  
                    + " AND "

@@ -228,6 +228,7 @@ public class InscripcionesControlador {
                         + "( (a.nombre_alumno) like '%" +nombre.toUpperCase() + "%'"
                         + " OR (a.apellido_alumno) like '%" +nombre.toUpperCase() + "%' )"
                         + " ORDER BY i.id_inscripcion, cta.id_cuenta offset " + offset + " limit " + Utiles.REGISTROS_PAGINA;                        
+                
                System.out.println("BUSCAR CUOTA por NOMBRE --> "+ sql);               
                 try (PreparedStatement ps = Conexion.getConn().prepareStatement(sql)) {
                     ResultSet rs = ps.executeQuery();
@@ -242,6 +243,7 @@ public class InscripcionesControlador {
                                + "<td>" + rs.getInt("monto_cuota") + "</td>"      
                                + "<td>" + rs.getInt("total_cuota") + "</td>"      
                                + "<td>" + rs.getString("estado") + "</td>"
+                               + "<td>" + rs.getDate("fecha_pago") + "</td>"
                                + "</tr>";
                     }   
                     if (tabla.equals("")) {
@@ -298,6 +300,8 @@ public class InscripcionesControlador {
                                + "<td>" + rs.getInt("monto_cuota") + "</td>"      
                                + "<td>" + rs.getInt("total_cuota") + "</td>"      
                                + "<td>" + rs.getString("estado") + "</td>"
+                               + "<td>" + rs.getDate("fecha_pago") + "</td>"
+                               
                                + "</tr>";
                     }   
                     if (tabla.equals("")) {
@@ -322,7 +326,10 @@ public class InscripcionesControlador {
             String sql = "SELECT COUNT(*) as TOTAL_CUOTAS_PENDIENTES,"
                     + "i.id_inscripcion, i.fecha_inscripcion,i.nro_cuotas,i.vencimientocuota_inscripcion,"
                     + "a.id_alumno, a.nombre_alumno, a.apellido_alumno,a.nroci_alumno,"
-                    + "cv.id_convocatoria,cv.monto_convocatoria,cv.codigo_convocatoria, cv.nombre_convocatoria"                            
+                    + "cv.id_convocatoria,cv.monto_convocatoria,cv.codigo_convocatoria, cv.nombre_convocatoria,"
+                    //REVISAR ESTA LINEA
+                    + "cta.monto_cuota as CUOTA_PENDIENTE"   
+                    
                     + " FROM inscripciones i,alumnos a,convocatorias cv,cuentas_cte cta"
                     + " WHERE "
                     + "i.id_alumno=a.id_alumno AND i.id_convocatoria=cv.id_convocatoria"
@@ -332,11 +339,12 @@ public class InscripcionesControlador {
                     + "cta.estado ='PENDIENTE'"
                     + " AND "
                     + "i.id_inscripcion ='" + inscripcion.getId_inscripcion() + "'"
+                    
                     + " GROUP BY "
                     + "i.id_inscripcion, i.fecha_inscripcion,i.nro_cuotas,"
                     + "a.id_alumno,a.nombre_alumno, a.apellido_alumno, a.nroci_alumno,"
                     + "cv.id_convocatoria,cv.nombre_convocatoria,cv.codigo_convocatoria,cv.monto_convocatoria,"
-                    + "cta.estado";
+                    + "cta.monto_cuota, cta.estado";
            
             try {
                 ResultSet rs = Conexion.getSt().executeQuery(sql);
@@ -365,6 +373,7 @@ public class InscripcionesControlador {
                     inscripcion.setFecha_inscripcion(rs.getDate("fecha_inscripcion"));
                     
                     inscripcion.setNro_cuotas(rs.getInt("TOTAL_CUOTAS_PENDIENTES"));
+                    
                                         
                 } else {    
                    inscripcion.setId_inscripcion(0);
@@ -424,14 +433,13 @@ public class InscripcionesControlador {
                         tabla += "<tr>"
                                 + "<td>" + rs.getString("id_inscripcion") + "</td>"
                                 + "<td>" + rs.getString("nombre_alumno") + "</td>"
-                                + "<td>" + rs.getString("nombre_convocatoria") + "</td>"
-                                
+                                + "<td>" + rs.getString("nombre_convocatoria") + "</td>"                                
                                 + "<td>" + rs.getString("cuota_cuota") + "</td>"
+                                + "<td>" + rs.getString("monto_cuota") + "</td>"
                                 + "<td>" + rs.getString("total_cuota") + "</td>"
                                 + "<td>" + rs.getString("estado") + "</td>"                                
+                                + "<td>" + rs.getString("fecha_pago") + "</td>"  
                                 + "</tr>";
-                        Cuentas cuenta = new Cuentas();
-                        cuenta.setCuota_cuota(rs.getInt("cuota_cuota"));
                     }   
                     if (tabla.equals("")) {
                         tabla = "<tr><td colspan=2> No existen registros...</td></tr>";
